@@ -1,19 +1,19 @@
 NAME = cub3d
 
-#SRC = 
+SRC = main.c\
+	  init.c
 
-CFLAGS -WALL -Wextra -Werror -I/usr/include -IMLX42 -03
+CFLAGS = -Wall -Wextra -Werror -I/usr/include -IMLX42 
 
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
-	@clang $(CFLAGS) -c $< -o $a
+	@clang $(CFLAGS) -I/usr/include -IMLX42 -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft -s
-	@make -C MLX42 -s
 	@make $(OBJ) libft/libft.a MLX42/libmlx42.a -LMLX42 -lXext -l42 -lm -lz -o $(NAME)
 
 clean:
