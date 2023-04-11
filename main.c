@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:41:28 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 15:59:46 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:14:56 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 	open_and_copy(argv, map);
 	check_params(map, argv);
 	init_map(map);
-	mlx_key_hook(map->mlx, &handle_key, map->mlx);
+	mlx_key_hook(map->mlx, &handle_key, NULL);
+	mlx_mouse_hook(map->mlx, &handle_mouse, NULL);
 	mlx_loop(map->mlx);
 	return (0);
 }
-	

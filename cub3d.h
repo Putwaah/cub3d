@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 15:59:25 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:09:07 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_image
 
 typedef struct s_map
 {
-	void	*mlx;
+	mlx_t	*mlx;
 	void	*win;
 	int		fd;
 	int		pos;
@@ -65,5 +65,5 @@ void	check_map(t_map *map);
 void	check_params(t_map *map, char **argv);
 
 /*handle.c*/
-void	handle_key(int key, t_map *map);
+void	handle_key(mlx_key_data_t key, void *param);
 #endif
