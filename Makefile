@@ -1,7 +1,9 @@
 NAME = cub3d
 
 SRC = main.c\
-	  init.c
+	  init.c\
+	  check.c\
+	  utils.c\
 
 CFLAGS = -Wall -Wextra -Werror -I/usr/include -IMLX42 
 

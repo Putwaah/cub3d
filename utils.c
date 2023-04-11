@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 11:12:45 by agoichon         ###   ########.fr       */
+/*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
+/*   Updated: 2023/04/11 10:09:28 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_struct(t_map *map)
+void	free_map(t_map *map)
 {
-	map->floor = NULL;
-	map->ceiling = NULL;
-	map->no = malloc(sizeof(t_image) * 1);
-	map->so = malloc(sizeof(t_image) * 1);
-	map->we = malloc(sizeof(t_image) * 1);
-	map->ea = malloc(sizeof(t_image) * 1);
-	if (!map->no || !map->so || !map->we || !map->ea)
+	free(map->no);
+	free(map->so);
+	free(map->we);
+	free(map->ea);
+	free(map->map_cpy);
+	free(map);
+}	
+
+void	line_counter(t_map *map)
+{
+	char	*ret;
+
+	ret = get_next_line(map->fd);
+	if (ret == 0)
 	{
+		printf("Error gnl\n");
 		free(map);
 		exit(1);
 	}
-	map->pos = 0;
+	map->len_map = ft_strlen(ret);
+	while (ret != NULL)
+	{
+		free(ret);
+		map->line++;
+		ret = get_next_line(map->fd);
+		if (ret == NULL)
+			free(ret);
+	}
 }
-
-
 

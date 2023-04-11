@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/10 15:27:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:55:56 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_map
 	void	*mlx;
 	void	*win;
 	int		fd;
+	int		pos;
 	int		len_map;
 	int		line;
 	char	**map_cpy;
@@ -49,6 +50,13 @@ typedef struct s_map
 
 /*init.c*/
 void	init_struct(t_map *map);
-void	open_and_copy(char **argv, t_map *map);
 
+/*utils.c*/
+void	free_map(t_map *map);	
+void	line_counter(t_map *map);
+
+/*check.c*/
+void	copy_map(t_map *map, char **argv);
+void	open_and_copy(char **argv, t_map *map);
+void	check_map(t_map *map);
 #endif
