@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 11:13:14 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:28:17 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void	open_and_copy(char **argv, t_map *map)
 {
 	int		i;
 	int		len;
-	char	*gnl;
 
 	i = 0;
 	len = ft_strlen(argv[1]) - 1;
