@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 14:13:14 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:59:25 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "../cub3d/libft/libft.h"
+# include "../cub3d/minilibx-linux/include/MLX42/MLX42.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -27,8 +28,6 @@
 typedef struct s_image
 {
 	void	*img;
-	int		img_x;
-	int		img_y;
 }	t_image;
 
 typedef struct s_map
@@ -51,6 +50,7 @@ typedef struct s_map
 
 /*init.c*/
 void	init_struct(t_map *map);
+void	init_map(t_map *map);
 
 /*utils.c*/
 void	free_map(t_map *map);	
@@ -63,4 +63,7 @@ void	check_map(t_map *map);
 
 /*check_params.c*/
 void	check_params(t_map *map, char **argv);
+
+/*handle.c*/
+void	handle_key(int key, t_map *map);
 #endif

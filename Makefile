@@ -6,7 +6,7 @@
 #    By: agoichon <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 11:21:27 by agoichon          #+#    #+#              #
-#    Updated: 2023/04/11 14:13:55 by agoichon         ###   ########.fr        #
+#    Updated: 2023/04/11 15:57:51 by agoichon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS		:=	main.c\
 				check_params.c\
 				init.c\
 				utils.c\
+				handle.c\
 
 
 #OBJECTS
