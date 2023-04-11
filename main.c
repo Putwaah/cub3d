@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:41:28 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/10 15:27:42 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:16:38 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 		return (1);
 	init_struct(map);
 	open_and_copy(argv, map);
+	check_params(map, argv);
 	return (0);
 }
 	

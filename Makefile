@@ -6,7 +6,7 @@
 #    By: agoichon <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/11 11:21:27 by agoichon          #+#    #+#              #
-#    Updated: 2023/04/11 11:27:48 by agoichon         ###   ########.fr        #
+#    Updated: 2023/04/11 14:13:55 by agoichon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ MLX_DIR			= 	./minilibx-linux/ --no-print-directory
 
 #SOURCES
 SRCS		:=	main.c\
-				check.c\
+				check_map.c\
+				check_params.c\
 				init.c\
 				utils.c\
 

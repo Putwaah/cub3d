@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 11:28:17 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:56:11 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft/libft.h"
+#include <stdlib.h>
 #include <unistd.h>
 
 void	check_map(t_map *map)
@@ -21,12 +22,15 @@ void	check_map(t_map *map)
 	int	len;
 
 	j = 0;
-	if (map->map_cpy[0][j] != '1')
+	if (map->map_cpy[0][j] != '1' && map->map_cpy[0][j] != ' '
+		&& map->map_cpy[0][j] != '\t')
 	{
 		printf("Map Error\n");
 		free_map(map);
 		exit(1);
-	}	
+	}
+	while (map->map_cpy[0][j] == ' ' || map->map_cpy[0][j] == '\t')
+		j++;
 	while (map->map_cpy[0][j] != '\n' && map->map_cpy[0][j] == '1')
 	{
 		if (map->map_cpy[0][j] != '1')
@@ -40,11 +44,13 @@ void	check_map(t_map *map)
 	i = 1;
 	while (i < map->line - 1)
 	{
-		j = 1;
+		j = 0;
 		while (map->map_cpy[i][j] != '\n')
 		{	
 			len = ft_strlen(map->map_cpy[i]) - 2;
-			if (map->map_cpy[i][0] != '1' || map->map_cpy[i][len] != '1')
+			while (map->map_cpy[i][j] == ' ' || map->map_cpy[i][j] == '\t')
+				j++;
+			if (map->map_cpy[i][j] != '1' || map->map_cpy[i][len] != '1')
 			{
 				printf("Map Error\n");
 				free_map(map);
@@ -89,19 +95,54 @@ void	check_map(t_map *map)
 		free_map(map);
 		exit(1);
 	}	
-}	
+}
+
+int	copy_map_utils(t_map *map)
+{
+	char	*gnl;
+	int		j;
+	int		counter;
+
+	gnl = ft_strdup(" ");
+	counter = 0;
+	while (gnl != NULL)
+	{
+		j = 0;
+		while (gnl[j])
+		{
+			while (gnl[j] == ' ' || gnl[j] == '\t')
+				j++;
+			if (gnl[j] != '1')
+				break ;
+			else
+			{
+				while (gnl[j] == '1' && gnl[j] != '\n')
+					j++;
+				if (gnl[j] == '\n')
+					return (counter);
+				if (gnl[j] != '1')
+				{
+					printf("Error 1er ligne\n");
+					free_map(map);
+					exit(1);
+				}	
+			}
+		}	
+		free (gnl);
+		gnl = get_next_line(map->fd);
+		counter++;
+	}
+	return (counter);
+}
 
 void	copy_map(t_map *map, char **argv)
 {
 	int		i;
+	int		j;
+	int		counter;
 	char	*gnl;
 
-	gnl = ft_strdup(" ");
-	while (gnl != NULL && ft_strncmp(gnl, "11", 2) != 0)
-	{
-		free (gnl);
-		gnl = get_next_line(map->fd);
-	}
+	counter = copy_map_utils(map) - 1;
 	line_counter(map);
 	map->map_cpy = malloc(sizeof(char *) * (map->line) + 1);
 	close(map->fd);
@@ -109,6 +150,11 @@ void	copy_map(t_map *map, char **argv)
 	gnl = get_next_line(map->fd);
 	while (gnl != NULL && ft_strncmp(gnl, "11", 2) != 0)
 	{
+		j = 0;
+		while (gnl[j] == ' ' || gnl[j] == '\t')
+			j++;
+		if (ft_strncmp(&gnl[j], "11", 2) == 0)
+			break ;
 		free (gnl);
 		gnl = get_next_line(map->fd);
 	}

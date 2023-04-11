@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 10:55:56 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:13:14 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_map
 	int		len_map;
 	int		line;
 	char	**map_cpy;
+	char	**param_cpy;
 	t_image	*no;
 	t_image	*so;
 	t_image	*we;
@@ -55,8 +56,11 @@ void	init_struct(t_map *map);
 void	free_map(t_map *map);	
 void	line_counter(t_map *map);
 
-/*check.c*/
+/*check_map.c*/
 void	copy_map(t_map *map, char **argv);
 void	open_and_copy(char **argv, t_map *map);
 void	check_map(t_map *map);
+
+/*check_params.c*/
+void	check_params(t_map *map, char **argv);
 #endif
