@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 16:09:07 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/12 10:55:07 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_map(t_map *map);
 /*utils.c*/
 void	free_map(t_map *map);	
 void	line_counter(t_map *map);
+int		ft_tablen(char **str);
 
 /*check_map.c*/
 void	copy_map(t_map *map, char **argv);

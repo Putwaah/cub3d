@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 10:09:28 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/12 11:10:58 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft/libft.h"
 
 void	free_map(t_map *map)
 {
@@ -20,6 +21,22 @@ void	free_map(t_map *map)
 	free(map->ea);
 	free(map->map_cpy);
 	free(map);
+}	
+
+int		ft_tablen(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{	
+		while (str[i][j])
+			j++;	
+		i++;
+	}
+	return (i);
 }	
 
 void	line_counter(t_map *map)
@@ -43,4 +60,3 @@ void	line_counter(t_map *map)
 			free(ret);
 	}
 }
-
