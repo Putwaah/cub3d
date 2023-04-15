@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/12 10:55:07 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/15 14:40:26 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,40 @@ typedef struct s_image
 
 typedef struct s_map
 {
+	char	**floor;
+	int		f;
+	char	**ceiling;
+	int		c;
+	mlx_texture_t	*no;
+	mlx_image_t		*no_img;
+	int		nor;
+	mlx_texture_t	*so;
+	mlx_image_t		*so_img;
+	int		sou;
+	mlx_texture_t	*we;
+	mlx_image_t		*we_img;
+	int		wes;
+	mlx_texture_t	*ea;
+	mlx_image_t		*ea_img;
+	int		eas;
 	mlx_t	*mlx;
 	void	*win;
 	int		fd;
 	int		pos;
-	int		len_map;
 	int		line;
 	char	**map_cpy;
 	char	**param_cpy;
-	t_image	*no;
-	t_image	*so;
-	t_image	*we;
-	t_image	*ea;
-	char	*floor;
-	char	*ceiling;
-}	t_map;
+	}	t_map;
 
 /*init.c*/
 void	init_struct(t_map *map);
-void	init_map(t_map *map);
+void	init_params(t_map *map);
 
 /*utils.c*/
 void	free_map(t_map *map);	
 void	line_counter(t_map *map);
 int		ft_tablen(char **str);
+char	*megatrim(t_map *map, const char *id, int i);
 
 /*check_map.c*/
 void	copy_map(t_map *map, char **argv);

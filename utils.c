@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/12 11:10:58 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/15 14:25:26 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,8 @@ void	free_map(t_map *map)
 	free(map->we);
 	free(map->ea);
 	free(map->map_cpy);
+	free(map->param_cpy);
 	free(map);
-}	
-
-int		ft_tablen(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{	
-		while (str[i][j])
-			j++;	
-		i++;
-	}
-	return (i);
 }	
 
 void	line_counter(t_map *map)
@@ -50,7 +35,6 @@ void	line_counter(t_map *map)
 		free(map);
 		exit(1);
 	}
-	map->len_map = ft_strlen(ret);
 	while (ret != NULL)
 	{
 		free(ret);
@@ -60,3 +44,12 @@ void	line_counter(t_map *map)
 			free(ret);
 	}
 }
+
+char	*megatrim(t_map *map, const char *id, int i)
+{
+	char	*rtn;
+
+	rtn = ft_strtrim(map->param_cpy[i], id);
+	rtn = ft_strtrim(rtn, "\n");
+	return (rtn);
+}	

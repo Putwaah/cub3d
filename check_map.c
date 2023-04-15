@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/11 14:56:11 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/15 14:09:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ void	open_and_copy(char **argv, t_map *map)
 		exit (1);
 	}
 	map->line = 1;
-	map->len_map = 0;
 	map->fd = open(argv[1], O_RDONLY);
 	copy_map(map, argv);
 	check_map(map);

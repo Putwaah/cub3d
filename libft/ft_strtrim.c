@@ -6,74 +6,46 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:21:34 by jtoulous          #+#    #+#             */
-/*   Updated: 2022/10/06 17:15:59 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/04/15 14:14:42 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	check_set(const char s, const char *set)
+static int	ft_counter(char c, const char *set)
 {
-	int	z;
+	int	i;
 
-	z = 0;
-	while (set[z])
+	i = 0;
+	while (set[i] != '\0')
 	{
-		if (s == set[z])
-			return (1);
-		z++;
-	}
-	return (0);
-}	
-
-static size_t	check_end(const char *s, const char *set, size_t z)
-{
-	while (s[z])
-	{
-		if (check_set(s[z], set) != 1)
+		if (set[i] == c)
 			return (0);
-		z++;
+		i++;
 	}
 	return (1);
 }
 
-static size_t	fnl_size(const char *s, const char *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	z;
-	size_t	size;
+	int		i;
+	int		l;
+	char	*s2;
 
-	z = 0;
-	size = 0;
-	while (check_set(s[z], set) == 1)
-		z++;
-	while ((check_set(s[z], set) != 1 || check_end(s, set, z) != 1)
-		&& s[z] != '\0')
-	{
-		z++;
-		size++;
-	}
-	return (size);
-}	
-
-char	*ft_strtrim(const char *s, const char *set)
-{
-	char	*fnl;
-	size_t	z;
-	size_t	y;
-
-	z = 0;
-	y = 0;
-	fnl = ft_calloc(fnl_size(s, set) + 1, sizeof(char));
-	if (!fnl)
-		return (0);
-	while (check_set(s[z], set) == 1)
-		z++;
-	while ((check_set(s[z], set) != 1 || check_end(s, set, z) != 1)
-		&& s[z] != '\0')
-	{
-		fnl[y] = s[z];
-		z++;
-		y++;
-	}
-	return (fnl);
+	if (!s1)
+		return (NULL);
+	i = 0;
+	l = ft_strlen(s1);
+	if (set == 0)
+		return ((char *)s1);
+	if (s1 == 0)
+		return ((char *)s1);
+	while (ft_counter(s1[i], set) == 0)
+		i++;
+	while (ft_counter(s1[l - 1], set) == 0)
+		l--;
+	s2 = ft_substr(s1, i, (l - i));
+	if (!s2)
+		return (NULL);
+	return (s2);
 }
