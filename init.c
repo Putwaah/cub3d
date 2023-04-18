@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/15 14:45:32 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:18:52 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	init_params(t_map *map)
 	{
 		printf("Error params\n");
 		free_map(map);
+		exit (1);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:41:28 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/15 13:52:02 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/18 10:25:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int argc, char **argv)
 	if (!map)
 		return (1);
 	init_struct(map);
-	map->mlx = mlx_init(1500, 1000, "cub3d", true);
 	open_and_copy(argv, map);
+	map->mlx = mlx_init(1500, 1000, "cub3d", true);
 	check_params(map, argv);
 	mlx_key_hook(map->mlx, &handle_key, NULL);
 	mlx_loop(map->mlx);
