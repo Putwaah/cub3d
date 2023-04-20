@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:18:54 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/02/13 15:07:21 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/19 13:46:43 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	stamp(char *dst, char *src)
 	y = 0;
 	while (dst[z])
 		z++;
-	while (src[y])
+	while (src[y] != '\0')
 	{
 		dst[z] = src[y];
 		z++;

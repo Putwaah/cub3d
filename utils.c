@@ -6,19 +6,24 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/15 14:25:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/20 08:42:05 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft/libft.h"
+#include <stdlib.h>
 
 void	free_map(t_map *map)
 {
 	free(map->no);
+	free(map->no_img);
 	free(map->so);
+	free(map->so_img);
 	free(map->we);
+	free(map->we_img);
 	free(map->ea);
+	free(map->ea_img);
 	free(map->map_cpy);
 	free(map->param_cpy);
 	free(map);
@@ -51,5 +56,20 @@ char	*megatrim(t_map *map, const char *id, int i)
 
 	rtn = ft_strtrim(map->param_cpy[i], id);
 	rtn = ft_strtrim(rtn, "\n");
+	rtn = ft_strtrim(rtn, "\t");
+	rtn = ft_strtrim(rtn, " ");
 	return (rtn);
+}
+
+void	free_split(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }	

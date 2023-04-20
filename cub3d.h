@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/15 14:40:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/20 08:47:34 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,11 @@
 # include <X11/X.h>
 # include <math.h>
 
-typedef struct s_image
-{
-	void	*img;
-}	t_image;
-
 typedef struct s_map
 {
-	char	**floor;
+	char	*floor;
 	int		f;
-	char	**ceiling;
+	char	*ceiling;
 	int		c;
 	mlx_texture_t	*no;
 	mlx_image_t		*no_img;
@@ -66,6 +61,7 @@ void	free_map(t_map *map);
 void	line_counter(t_map *map);
 int		ft_tablen(char **str);
 char	*megatrim(t_map *map, const char *id, int i);
+void	free_split(char **str);
 
 /*check_map.c*/
 void	copy_map(t_map *map, char **argv);
@@ -74,7 +70,8 @@ void	check_map(t_map *map);
 
 /*check_params.c*/
 void	check_params(t_map *map, char **argv);
-
+void	load_texture(t_map *map, char *str, int i);
+void	load_color(t_map *map, char *str, int i);
 /*handle.c*/
 void	handle_key(mlx_key_data_t key, void *param);
 #endif

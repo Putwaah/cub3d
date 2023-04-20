@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/18 11:35:23 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/20 09:50:31 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	check_map(t_map *map)
 {
 	int	i;
-	int j;
+	int	j;
 	int	len;
 
 	j = 0;
@@ -37,7 +37,8 @@ void	check_map(t_map *map)
 		}	
 		j++;
 	}	
-	while (map->map_cpy[0][j] != '\n' && (map->map_cpy[0][j] == '1' || map->map_cpy[0][j] == ' '))
+	while (map->map_cpy[0][j] != '\n' && (map->map_cpy[0][j] == '1'
+			|| map->map_cpy[0][j] == ' '))
 	{
 		if (map->map_cpy[1][j] == 0)
 		{	
@@ -47,8 +48,15 @@ void	check_map(t_map *map)
 		}	
 	j++;
 	}
+	i = 0;
+	map->line = 1;
+	while (*map->map_cpy[i] != '\n')
+	{
+		map->line++;
+		i++;
+	}
 	i = 1;
-	while (i < map->line - 1)
+	while (i < map->line - 2)
 	{
 		j = 0;
 		while (map->map_cpy[i][j] != '\n')
@@ -64,21 +72,34 @@ void	check_map(t_map *map)
 			}
 			while (j < len)
 			{
-				if (map->map_cpy[i][j] != '0'  && map->map_cpy[i][j] != ' ' && map->map_cpy[i][j] != '1' &&  map->map_cpy[i][j] != 'N')
+				if (map->map_cpy[i][j] != '0' && map->map_cpy[i][j] != ' '
+					&& map->map_cpy[i][j] != '1'
+					&& (map->map_cpy[i][j] != 'N'
+					&& map->map_cpy[i][j] != 'S'
+					&& map->map_cpy[i][j] != 'E'
+					&& map->map_cpy[i][j] != 'W'))
 				{
 					printf("Map Error 5\n");
 					free_map(map);
 					exit(1);
 				}
-					if (map->map_cpy[i][j] == ' ' && map->map_cpy[i - 1][j] != '1' && map->map_cpy[i - 1][j] != ' ')
-					{
-						printf("Map Error 6\n");
-						free_map(map);
-						exit(1);
-					}	
-				if (map->map_cpy[i][j] == 'N' && map->pos != 1)
+				if (map->map_cpy[i][j] == ' ' && map->map_cpy[i - 1][j] == '0')
+				{
+					printf("Map Error 6\n");
+					free_map(map);
+					exit(1);
+				}	
+				if ((map->map_cpy[i][j] == 'N'
+					|| map->map_cpy[i][j] == 'S'
+					|| map->map_cpy[i][j] == 'E'
+					|| map->map_cpy[i][j] == 'W')
+					&& map->pos != 1)
 					map->pos = 1;
-				else if (map->map_cpy[i][j] == 'N' && map->pos == 1)
+				else if ((map->map_cpy[i][j] == 'N'
+					|| map->map_cpy[i][j] == 'S'
+					|| map->map_cpy[i][j] == 'E'
+					|| map->map_cpy[i][j] == 'W')
+					&& map->pos == 1)
 				{
 					printf("va te faire enculer c'est solo\n");
 					free_map(map);
@@ -95,17 +116,20 @@ void	check_map(t_map *map)
 	{
 		if (map->map_cpy[i][j] != '1')
 		{
-			if (map->map_cpy[i][j] == ' ' && (map->map_cpy[i - 1][j] == '1' || (map->map_cpy[i - 1][j] == ' ')))
+			if (map->map_cpy[i][j] == ' ' && (map->map_cpy[i - 1][j] == '1'
+				|| (map->map_cpy[i - 1][j] == ' ')))
 				j++;
-			if (map->map_cpy[i][j] == '0')
+			if (map->map_cpy[i][j] == '0' || (map->map_cpy[i][j] == ' '
+				&& (map->map_cpy[i - 1][j] == '1'
+				|| map->map_cpy[i - 1][j] == ' ')))
 			{
 				printf("Map Error 7\n");
-			free_map(map);
-			exit(1);
+				free_map(map);
+				exit(1);
 			}
 			if ((map->map_cpy[i][j] == ' ' && map->map_cpy[i - 1][j] != '1'))
 			{
-				printf("Map Error 7\n");
+				printf("Map Error 8\n");
 				free_map(map);
 				exit(1);
 			}

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/18 10:18:52 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:18:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	init_struct(t_map *map)
 	map->ea = malloc(sizeof(mlx_texture_t) * 1);
 	map->ea_img = malloc(sizeof(mlx_image_t) * 1);
 	map->eas = 0;
-	if (!map->no || !map->so || !map->we || !map->ea)
+	if (!map->no || !map->so || !map->we || !map->ea
+		|| !map->no_img || !map->so_img || !map->we_img || !map->ea_img)
 	{
 		free(map);
 		exit(1);
@@ -41,29 +42,58 @@ void	init_struct(t_map *map)
 	map->pos = 0;
 }
 
+void	init_params_bis(t_map *map, int i)
+{
+	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->nor == 0)
+		map->nor = 1;
+	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->nor == 1)
+		map->nor = 2;
+	if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0 && map->sou == 0)
+		map->sou = 1;
+	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->sou == 1)
+		map->sou = 2;
+	if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0 && map->wes == 0)
+		map->wes = 1;
+	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->wes == 1)
+		map->wes = 2;
+	if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0 && map->eas == 0)
+		map->eas = 1;
+	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->eas == 1)
+		map->eas = 2;
+	if (ft_strncmp(map->param_cpy[i], "F", 1) == 0 && map->f == 0)
+		map->f = 1;
+	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->f == 1)
+		map->f = 2;
+	if (ft_strncmp(map->param_cpy[i], "C", 1) == 0 && map->c == 0)
+		map->c = 1;
+	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->f == 1)
+		map->f = 2;
+}	
+
+void	init_params_ter(t_map *map, int i)
+{
+	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
+		load_texture(map, "NO ", i);
+	if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
+		load_texture(map, "SO ", i);
+	if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
+		load_texture(map, "WE ", i);
+	if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
+		load_texture(map, "EA ", i);
+	if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
+		load_color(map, "F ", i);
+	if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
+		load_color(map, "C ", i);
+}	
+
 void	init_params(t_map *map)
 {
 	int	i;
-	int	j;
-	char *tmp;
 
 	i = 0;
-	tmp = NULL;
-	j = 0;
 	while (map->param_cpy[i] != NULL)
-	{	
-		if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->nor == 0)
-			map->nor = 1;
-		if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0 && map->sou == 0)
-			map->sou = 1;
-		if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0 && map->wes == 0)
-			map->wes = 1;
-		if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0 && map->eas == 0)
-			map->eas = 1;
-		if (ft_strncmp(map->param_cpy[i], "F", 1) == 0 && map->f == 0)
-			map->f = 1;
-		if (ft_strncmp(map->param_cpy[i], "C", 1) == 0 && map->c == 0)
-			map->c = 1;
+	{
+		init_params_bis(map, i);
 		i++;
 	}
 	if (map->nor + map->sou + map->wes + map->eas + map->c + map->f != 6)
@@ -76,42 +106,9 @@ void	init_params(t_map *map)
 	{
 		i = 0;
 		while (map->param_cpy[i] != NULL)
-		{	
-			if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
-			{
-				tmp = megatrim(map, "NO ", i);
-				map->no = mlx_load_png(tmp);
-				map->no_img = mlx_texture_to_image(map->mlx, map->no);
-			}
-			if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
-			{	
-				tmp = megatrim(map, "SO ", i);
-				map->so = mlx_load_png(tmp);
-				map->so_img = mlx_texture_to_image(map->mlx, map->so);
-			}
-			if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
-			{
-				tmp = megatrim(map, "WE ", i);
-				map->we = mlx_load_png(tmp);
-				map->we_img = mlx_texture_to_image(map->mlx, map->we);
-			}
-			if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
-			{
-				tmp = megatrim(map, "EA ", i);
-				map->ea = mlx_load_png("./img/ea.png");
-				map->ea_img = mlx_texture_to_image(map->mlx, map->ea);
-			}
-			if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
-			{
-				tmp = megatrim(map, "F ", i);
-				map->floor = ft_split(tmp, ',');
-			}
-			if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
-			{
-				tmp = megatrim(map, "C ", i);
-				map->floor = ft_split(tmp, ',');
-			}
+		{
+			init_params_ter(map, i);
 			i++;
-		}
-	}	
+		}	
+	}
 }	
