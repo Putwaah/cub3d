@@ -101,6 +101,7 @@ typedef struct s_map
 	t_mlx	*mlx;
 	t_img	**tex;
 	t_img	*frame;
+	t_player	*player;
 }		t_map;
 
 /*init.c*/
