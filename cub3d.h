@@ -101,8 +101,14 @@ typedef struct s_map
 	t_mlx	*mlx;
 	t_img	**tex;
 	t_img	*frame;
-	t_player	*player;
+	//t_player	*player;
 }		t_map;
+
+typedef struct s_game
+{
+	t_map 		*map;
+	t_player	*player;
+}			t_game;
 
 /*init.c*/
 void	init_struct(t_map *map);

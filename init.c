@@ -94,9 +94,7 @@ void	init_params(t_map *map)
 	{
 		init_params_bis(map, i);
 		i++;
-	}map[3] 10000000000000000000000000001
-map[4] 10000000000000000000000000001
-
+	}
 	/*if (map->nor + map->sou + map->wes + map->eas + map->c + map->f != 6)
 	{
 		printf("Error params\n");

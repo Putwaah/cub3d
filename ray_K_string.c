@@ -162,15 +162,16 @@ void    ray_k_string(t_map *map, t_player *player)
 {
     int x;
     int y;
-    t_rayKsting data;
+    t_rayKsting ray_data;
   
     x = 0;
     while (x < WIDTH)
     {
-        rayKsting_init(player , &data, x);
-        dda(&data, map->map_cpy);
-        draw(&data, map, player, x);
+        rayKsting_init(player , &ray_data, x);
+        dda(&ray_data, map->map_cpy);
+        draw(&ray_data, map, player, x);
         x++;
     }
     mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
+    //reset_frame(map->mlx->frame);  a faire
 }

@@ -38,7 +38,7 @@ $(MLX_NAME):
 $(NAME): $(OBJ)
 	@make -C $(MLX_PATH)
 	@make -C $(LIBFT_PATH)
-	$(CC) $(OBJ) $(LIBFT_NAME) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ) $(LIBFT_NAME) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -no-pie -o $(NAME)
 
 clean: 
 	@make clean -C $(LIBFT_PATH)

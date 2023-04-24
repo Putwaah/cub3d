@@ -58,12 +58,8 @@ char	*triple_strjoin(char *s1, char *s2, char *s3)
 
 char	*strjoin_n_free(char *s1, char *s2)
 {
-	int		z;
-	int		y;
 	char	*fnl;
 
-	z = 0;
-	y = 0;
 	fnl = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1,
 			sizeof(char));
 	if (s1)
