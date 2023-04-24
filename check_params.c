@@ -11,10 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 void	check_params(t_map *map, char **argv)
 {
@@ -39,14 +35,20 @@ void	check_params(t_map *map, char **argv)
 	init_params(map);
 }
 
-void	load_texture(t_map *map, char *str, int i)
+void	load_texture(t_map *map, char *str, int i, int dir)
 {
 	char	*tmp;
+	int		w;
+	int		h;
 
+	w = WIDTH;
+	h = HEIGHT;
 	tmp = megatrim(map, str, i);
-	map->no = mlx_load_png(tmp);
+	if (access(tmp, F_OK) != 0)
+		end_game(map);
+	map->tex[dir]->img = mlx_xpm_file_to_image(map->mlx->display, tmp, &w, &h);
+	map->tex[dir]->addr = mlx_get_data_addr(map->tex[dir]->img, &map->tex[dir]->bpp, &map->tex[dir]->line_len, &map->tex[dir]->endian);
 	free(tmp);
-	map->no_img = mlx_texture_to_image(map->mlx, map->no);
 }
 
 void	load_color(t_map *map, char *str, int i)

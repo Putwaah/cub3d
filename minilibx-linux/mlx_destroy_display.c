@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle.c                                           :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 15:53:37 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/12 10:37:49 by agoichon         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "mlx_int.h"
 
-
-int	handle_key(int key, void *param)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	t_map	*map;
-	map = (t_map *)param;
-	
-	if (key == XK_Escape)
-		end_game(map);
-	if (key == XK_w)
-	{
-	}
-	if (key == XK_a)
-	{
-	}
-	if (key == XK_d)
-	{
-	}
-	if (key == XK_s)
-	{}
+	XCloseDisplay(xvar->display);
 }

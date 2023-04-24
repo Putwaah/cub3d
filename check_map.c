@@ -11,18 +11,17 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 void	check_map(t_map *map)
 {
 	int	i;
-	int	j;
+	volatile int	j;
 	int	len;
 
 	j = 0;
-	if (map->map_cpy[0][j] != '1' && map->map_cpy[0][j] != ' '
+	//for (int z= 0; map->map_cpy[z]; z++)
+	//	printf("%s", map->map_cpy[z]);
+	/*if (map->map_cpy[0][j] != '1' && map->map_cpy[0][j] != ' '
 		&& map->map_cpy[0][j] != '\t')
 	{
 		printf("Map Error 1\n");
@@ -32,25 +31,26 @@ void	check_map(t_map *map)
 	while (map->map_cpy[0][j] == ' ' || map->map_cpy[0][j] == '\t')
 	{
 		if (map->map_cpy[1][j] == 0)
-		{
+		{	
 			printf("Error 2\n");
-		}	
+			exit(0);
+		}
 		j++;
-	}	
+	}
 	while (map->map_cpy[0][j] != '\n' && (map->map_cpy[0][j] == '1'
-			|| map->map_cpy[0][j] == ' '))
+			&& map->map_cpy[0][j] == ' ') && map->map_cpy[0][j])
 	{
-		if (map->map_cpy[1][j] == 0)
+		if (map->map_cpy[1][j] == 0 && map->map_cpy[0][j] == ' ')
 		{	
 			printf("Map Error 3\n");
 			free_map(map);
 			exit(1);
 		}	
-	j++;
-	}
+		j++;
+	}*/
 	i = 0;
 	map->line = 1;
-	while (*map->map_cpy[i] != '\n')
+	while (*map->map_cpy[i] != '\n' || *map->map_cpy[i])
 	{
 		map->line++;
 		i++;
@@ -191,7 +191,7 @@ void	copy_map(t_map *map, char **argv)
 
 	counter = copy_map_utils(map) - 1;
 	line_counter(map);
-	map->map_cpy = malloc(sizeof(char *) * (map->line + 1));
+	map->map_cpy = calloc((map->line + 1), sizeof(char *));
 	close(map->fd);
 	map->fd = open(argv[1], O_RDONLY);
 	gnl = get_next_line(map->fd);
@@ -231,6 +231,6 @@ void	open_and_copy(char **argv, t_map *map)
 	map->line = 1;
 	map->fd = open(argv[1], O_RDONLY);
 	copy_map(map, argv);
-	check_map(map);
+	//check_map(map);
 	close(map->fd);
 }

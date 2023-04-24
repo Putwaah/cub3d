@@ -11,22 +11,30 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
-#include <stdlib.h>
 
 void	free_map(t_map *map)
 {
-	free(map->no);
-	free(map->no_img);
-	free(map->so);
-	free(map->so_img);
-	free(map->we);
-	free(map->we_img);
-	free(map->ea);
-	free(map->ea_img);
-	free(map->map_cpy);
-	free(map->param_cpy);
-	free(map);
+	int	z;
+
+	z = -1;
+	if (map->map_cpy != NULL)
+		free (map->map_cpy);
+	if (map->param_cpy != NULL)
+		free (map->param_cpy);
+	if (map->mlx != NULL)
+		free (map->mlx);
+	if (map->frame != NULL)
+		free (map->frame);
+	if (map->tex != NULL)
+	{
+		while (++z < 4)
+			free (map->tex[z]);
+		free (map->tex);
+	}
+	if (map->floor != NULL)
+		free (map->floor);
+	if (map->ceiling != NULL)
+		free (map->ceiling);
 }	
 
 void	line_counter(t_map *map)
@@ -73,3 +81,37 @@ void	free_split(char **str)
 	}
 	free(str);
 }	
+
+void	end_game(t_map *map) //free tout et exit
+{
+	//if (opt == 2)
+		destroy_the_mlx(map->mlx, map->frame, map->tex);
+	free_map(map);
+	exit (69);
+}
+
+void	b_null(t_map *map)
+{
+	map->map_cpy = NULL;
+	map->param_cpy = NULL;
+	map->mlx = NULL;
+	map->frame = NULL;
+	map->tex = NULL;
+	map->ceiling = NULL;
+	map->floor = NULL;
+}
+
+void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
+{
+	int	z;
+
+	z = -1;
+	mlx_destroy_image(mlx->display, frame->img);
+	while (++z < 4)
+	{
+		if (tex[z]->img != NULL)
+			mlx_destroy_image(mlx->display, tex[z]->img);
+	}
+	mlx_destroy_window(mlx->display, mlx->win);
+	mlx_destroy_display(mlx->display);
+}

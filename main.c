@@ -11,24 +11,22 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
-#include "minilibx-linux/include/MLX42/MLX42.h"
 
-int	main(int argc, char **argv)
+t_map	*parsing(int argc, char **argv)
 {
 	t_map	*map;
-
+	
 	if (argc != 2)
 	{
 		printf("Error arguments\n");
-		return (1);
+		return (NULL);
 	}
 	map = malloc(sizeof(t_map) * 1);
 	if (!map)
-		return (1);
+		exit (1);
 	init_struct(map);
 	open_and_copy(argv, map);
-	map->mlx = mlx_init(1500, 1000, "cub3d", true);
+	//map->mlx = mlx_init(1500, 1000, "cub3d", true);
 	check_params(map, argv);
 	for (int z = 0; map->map_cpy[z]; z++)
 	{
@@ -38,9 +36,18 @@ int	main(int argc, char **argv)
 	{
 		printf("param[%d] %s", z, map->param_cpy[z]);
 	}
+	return (map);
+}
 
-	mlx_key_hook(map->mlx, &handle_key, NULL);
-	mlx_loop(map->mlx);
-	mlx_terminate(map->mlx);
+int	main(int argc, char **argv)
+{
+	t_map		*map;
+	t_player	*player;
+
+	map = parsing(argc, argv);
+	player = init_player_data(map->map_cpy);//player pos, dir, etc ...
+	ray_k_string(map, player);
+	//mlx_key_hook(map->mlx, &handle_key, map);
+	mlx_loop(map->mlx->display);
 	return (0);
 }

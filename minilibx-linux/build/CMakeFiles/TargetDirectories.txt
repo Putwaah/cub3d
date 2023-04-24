@@ -1,3 +1,0 @@
-/nfs/homes/agoichon/cub3d/minilibx-linux/build/CMakeFiles/rebuild_cache.dir
-/nfs/homes/agoichon/cub3d/minilibx-linux/build/CMakeFiles/edit_cache.dir
-/nfs/homes/agoichon/cub3d/minilibx-linux/build/CMakeFiles/mlx42.dir
