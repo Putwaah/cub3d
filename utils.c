@@ -84,8 +84,7 @@ void	free_split(char **str)
 
 void	end_game(t_map *map) //free tout et exit
 {
-	//if (opt == 2)
-		destroy_the_mlx(map->mlx, map->frame, map->tex);
+	destroy_the_mlx(map->mlx, map->frame, map->tex);
 	free_map(map);
 	exit (69);
 }

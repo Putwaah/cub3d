@@ -19,11 +19,10 @@ void	move_forward(t_map *map, t_player *player)
 
 	next_x = player->pos_x + player->dir_x * 0.1;
 	next_y = player->pos_y + player->dir_y * 0.1;
-	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
+	if (map->map_cpy[(int)next_y][(int)next_x] == '0')
 	{
 		player->pos_x = next_x;
 		player->pos_y = next_y;
-		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
 	}
 }
@@ -39,7 +38,6 @@ void	move_backward(t_map *map, t_player *player)
 	{
 		player->pos_x = next_x;
 		player->pos_y = next_y;
-		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
 	}
 }
@@ -55,7 +53,6 @@ void	move_left(t_map	*map, t_player	*player)
 	{	
 		player->pos_x -= next_x * SPEED;
 		player->pos_y -= next_y * SPEED; 
-		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
 	}
 }
@@ -71,7 +68,6 @@ void	move_right(t_map	*map, t_player *player)
 	{	
 		player->pos_x -= next_x * SPEED;
 		player->pos_y -= next_y * SPEED; 
-		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
 	}
 }
@@ -99,13 +95,13 @@ int	handle_key(int key, void *param)
 	game = (t_game *)param;
 	if (key == XK_Escape)
 		end_game(game->map);
-	if (key == XK_W)
+	else if (key == XK_w)
 		move_forward(game->map, game->player);
-	if (key == XK_A)
+	else if (key == XK_a)
 		move_right(game->map, game->player);
-	if (key == XK_D)
+	else if (key == XK_d)
 		move_left(game->map, game->player);
-	if (key == XK_S)
+	else if (key == XK_s)
 		move_backward(game->map, game->player);
 	//else if (key == XK_Rigth)
 	//	move_view_right(game->map->map_cpy, game->player);
