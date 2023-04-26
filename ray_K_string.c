@@ -120,13 +120,27 @@ void    calc_draw_params(t_rayKsting *data, t_player *player)
         data->tex_x = 64 - data->tex_x - 1;  
 }
 
-/*void    draw_roof()
+void    draw_roof(t_map *map, int draw_start, int *y, int x)
 {
-}*/
+    unsigned int    color = 0x0000FF;
+    
+    while (*y < draw_start)
+    {
+        set_pixel(map->frame, x, *y, color);
+        *y += 1;
+    }
+}
 
-/*void    draw_floor()
+void    draw_floor(t_map *map, int *y, int x)
 {
-}*/
+    unsigned int    color = 0xFF0000;
+    
+    while (*y < HEIGHT)
+    {
+        set_pixel(map->frame, x, *y, color);
+        *y += 1;
+    }
+}
 
 void    draw(t_rayKsting *data, t_map *map, t_player *player, int x)
 {
@@ -140,8 +154,7 @@ void    draw(t_rayKsting *data, t_map *map, t_player *player, int x)
     calc_draw_params(data, player);
     step = 1.0 * 64 / data->line_height;
     tex_pos = (data->draw_start - data->pitch - HEIGHT / 2 + data->line_height / 2) * step;
-    //draw_roof(data, &y);
-    y = data->draw_start;
+    draw_roof(map, data->draw_start, &y, x);
     while (y <= data->draw_end)
     {
         data->tex_y = (((y * 2 - HEIGHT + data->line_height) << 6) / data->line_height) / 2;
@@ -155,7 +168,7 @@ void    draw(t_rayKsting *data, t_map *map, t_player *player, int x)
         set_pixel(map->frame, x, y, color);
         y++;
     } 
-    //draw_floor(&data, &y);
+    draw_floor(map, &y, x);
 }
 
 void    clear_frame(t_img *frame)
@@ -201,5 +214,5 @@ void    ray_k_string(t_map *map, t_player *player)
         x++;
     }
     mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
-    clear_frame(map->frame);
+    //clear_frame(map->frame);
 }

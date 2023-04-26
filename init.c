@@ -179,6 +179,9 @@ t_player	*init_player_data(char **map)
 			{	
 				init_dir(map[x][y], player);
 				found = 1;
+				player->pos_x = x + 0.5;
+				player->pos_y = y + 0.5;
+				map[x][y] = '0';
 			}
 			y++;
 		}
@@ -186,9 +189,5 @@ t_player	*init_player_data(char **map)
 		if (found != 1)
 			y = 0;
 	}
-	player->pos_x = x - 0.5;
-	player->pos_y = y - 0.5;
-	//player->plane_x = 0;
-	//player->plane_y = 0.66;
 	return (player);
 }
