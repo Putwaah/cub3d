@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	game.map = parsing(argc, argv);
 	game.player = init_player_data(game.map->map_cpy);//player pos, dir, etc ...
 	ray_k_string(game.map, game.player);
-	mlx_key_hook(game.map->mlx->display , &handle_key, (void *)&game);
+	mlx_key_hook(game.map->mlx->win, &handle_key, (void *)&game);
 	mlx_loop(game.map->mlx->display);
 	return (0);
 }

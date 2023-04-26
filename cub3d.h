@@ -30,6 +30,8 @@
 # define HEIGHT 600
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define SPEED 0.2
+# define ROT_SPEED 0.1
 
 typedef struct s_mlx
 {

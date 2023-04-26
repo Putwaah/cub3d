@@ -23,6 +23,7 @@ void	move_forward(t_map *map, t_player *player)
 	{
 		player->pos_x = next_x;
 		player->pos_y = next_y;
+		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
 	}
 }
@@ -38,23 +39,51 @@ void	move_backward(t_map *map, t_player *player)
 	{
 		player->pos_x = next_x;
 		player->pos_y = next_y;
+		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
 	}
 }
 
-/*void	move_left(t_map	*map, t_player	*player)
+void	move_left(t_map	*map, t_player	*player)
 {
+	double	next_x;
+	double	next_y;
+
+	next_x = -player->dir_y * SPEED;
+	next_y = player->dir_x * SPEED;
+	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
+	{	
+		player->pos_x -= next_x * SPEED;
+		player->pos_y -= next_y * SPEED; 
+		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
+	}
 }
 
 void	move_right(t_map	*map, t_player *player)
 {
+	double	next_x;
+	double	next_y;
+
+	next_x = player->dir_y * 	SPEED;
+	next_y = -player->dir_x * SPEED;
+	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
+	{	
+		player->pos_x -= next_x * SPEED;
+		player->pos_y -= next_y * SPEED; 
+		mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
 		ray_k_string(map, player);
+	}
 }
 
-void	move_view_right(t_map *map ,t_player *player)
+/*void	move_view_right(t_map *map ,t_player *player)
 {
-		ray_k_string(map, player);
+	double	old_dir_x;
+
+	old_dir_x = player->dir_x;
+	player->dir_x = player->dir_x * cos(-ROT_SPEED) - player->dir_y * sin(-ROT_SPEED);
+	
+	ray_k_string(map, player);
 }
 
 void	move_view_right(t_map *map, t_player *player)
@@ -70,13 +99,13 @@ int	handle_key(int key, void *param)
 	game = (t_game *)param;
 	if (key == XK_Escape)
 		end_game(game->map);
-	else if (key == XK_w)
+	if (key == XK_W)
 		move_forward(game->map, game->player);
-	//else if (key == XK_a)
-	//	move_right(game->map->map_cpy, game->player)
-	//else if (key == XK_d)
-	//	move_left(game->map->map_cpy, game->player);
-	else if (key == XK_s)
+	if (key == XK_A)
+		move_right(game->map, game->player);
+	if (key == XK_D)
+		move_left(game->map, game->player);
+	if (key == XK_S)
 		move_backward(game->map, game->player);
 	//else if (key == XK_Rigth)
 	//	move_view_right(game->map->map_cpy, game->player);

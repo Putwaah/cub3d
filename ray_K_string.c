@@ -11,7 +11,7 @@ void    set_pixel(t_img *frame, int x, int y, unsigned int color)
     {
         *(pixel + 2) = (color >> 16) & 0xFF;
         *(pixel + 1) = (color >> 8) & 0xFF;
-        *(pixel + 0) = color & 0xFF;
+        *(pixel) = color & 0xFF;
     }
 }
 
@@ -158,6 +158,34 @@ void    draw(t_rayKsting *data, t_map *map, t_player *player, int x)
     //draw_floor(&data, &y);
 }
 
+void    clear_frame(t_img *frame)
+{
+    int x;
+    int y;
+    char    *pix;
+
+    x = -1;
+    y = -1;
+    while (++x < WIDTH)
+    {
+        while (++y < HEIGHT)
+        {
+            pix = frame->addr + (y * frame->line_len + x * (frame->bpp / 8));
+            if (frame->bpp == 32)
+                *(int *)pix = 0;
+            else if (frame->bpp == 24)
+            {
+                *(pix) = 0;
+                *(pix + 1) = 0;
+                *(pix + 2) = 0;
+            }
+            y++;
+        }
+        y = 0;
+        x++;
+    }
+}
+
 void    ray_k_string(t_map *map, t_player *player)
 {
     int x;
@@ -173,5 +201,5 @@ void    ray_k_string(t_map *map, t_player *player)
         x++;
     }
     mlx_put_image_to_window(map->mlx->display, map->mlx->win, map->frame->img, 0, 0);
-    //reset_frame(map->mlx->frame);  a faire
+    clear_frame(map->frame);
 }
