@@ -152,16 +152,18 @@ void    draw(t_rayKsting *data, t_map *map, t_player *player, int x)
 
     y = 0;
     calc_draw_params(data, player);
-    step = 1.0 * 64 / data->line_height;
+    step = 1.0 * TEX_HEIGHT / data->line_height;
     tex_pos = (data->draw_start - data->pitch - HEIGHT / 2 + data->line_height / 2) * step;
     draw_roof(map, data->draw_start, &y, x);
     while (y <= data->draw_end)
     {
-        data->tex_y = (((y * 2 - HEIGHT + data->line_height) << 6) / data->line_height) / 2;
-        d = (y - HEIGHT / 2 + data->line_height / 2) * 256;
-        data->tex_y = ((d * 64) / data->line_height) / 256;
-        while (data->tex_y >= 64)
-            data->tex_y -= 64;
+        //data->tex_y = (((y * 2 - HEIGHT + data->line_height) << 6) / data->line_height) / 2;
+        //d = (y - HEIGHT / 2 + data->line_height / 2) * 256;
+        //data->tex_y = ((d * 64) / data->line_height) / 256;
+        //while (data->tex_y >= 64)
+        //    data->tex_y -= 64;
+        data->tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+        tex_pos += step;
         color = get_pixel(map->tex[data->tex_num], data->tex_x, data->tex_y);
         if (data->side == 1)
             color = (color >> 1) & 0x7F7F7F;

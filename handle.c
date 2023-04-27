@@ -17,8 +17,8 @@ void	move_forward(t_map *map, t_player *player)
 	double	next_x;
 	double	next_y;
 
-	next_x = player->pos_x + player->dir_x * 0.1;
-	next_y = player->pos_y + player->dir_y * 0.1;
+	next_x = player->pos_x + player->dir_x * SPEED;
+	next_y = player->pos_y + player->dir_y * SPEED;
 	//if (next_x < 0 || next_y < 0)
 	//	return ;
 	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
@@ -34,8 +34,8 @@ void	move_backward(t_map *map, t_player *player)
 	double	next_x;
 	double	next_y;
 
-	next_x = player->pos_x - player->dir_x * 0.1;
-	next_y = player->pos_y - player->dir_y * 0.1;
+	next_x = player->pos_x - player->dir_x * SPEED;
+	next_y = player->pos_y - player->dir_y * SPEED;
 	//if (next_x < 0 || next_y < 0)
 	//	return ;
 	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
