@@ -83,6 +83,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	int		key_release;
 }	t_player;
 
 typedef struct s_map
@@ -133,7 +134,8 @@ void	check_params(t_map *map, char **argv);
 void	load_texture(t_map *map, char *str, int i, int dir);
 void	load_color(t_map *map, char *str, int i);
 /*handle.c*/
-int	handle_key(int key, void *param);
+int	press_key(int key, void *param);
+int	release_key(int key, void *param);
 
 void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
 void	b_null(t_map *map);

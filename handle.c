@@ -111,7 +111,7 @@ void	move_view_left(t_map *map, t_player *player)
 	ray_k_string(map, player);	
 }
 
-int	handle_key(int key, void *param)
+int	press_key(int key, void *param)
 {
 	t_game	*game;
 	
@@ -130,5 +130,11 @@ int	handle_key(int key, void *param)
 		move_view_right(game->map, game->player);
 	else if (key == XK_Left)
 		move_view_left(game->map, game->player);
+	game->player->key_release = 0;
+	return (0);
+}
+
+int	release_key(int key, void *param)
+{
 	return (0);
 }
