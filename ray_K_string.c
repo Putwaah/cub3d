@@ -106,8 +106,16 @@ void    calc_draw_params(t_rayKsting *data, t_player *player)
     if (data->draw_end >= HEIGHT)
         data->draw_end = HEIGHT - 1;
     data->tex_num = 0;
-    if (data->side == 1)
-        data->tex_num = 1;       
+    //if (data->side == 1)
+    //    data->tex_num = 1;
+    if (data->side == 0 && data->ray_dir_x > 0)
+        data->tex_num = 0;
+    else if(data->side == 0 && data->ray_dir_x < 0)
+        data->tex_num = 1;
+    else if (data->side == 1 && data->ray_dir_y > 0)
+        data->tex_num = 2;       
+    else
+        data->tex_num = 3;
     if (data->side == 0)
         data->wall_x = player->pos_y + data->perp_wall_dist * data->ray_dir_y;
     else
