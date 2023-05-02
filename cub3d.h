@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/20 08:47:34 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:52:59 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void	line_counter(t_map *map);
 int		ft_tablen(char **str);
 char	*megatrim(t_map *map, const char *id, int i);
 void	free_split(char **str);
+int	ft_putdigit_base(size_t nbr, int base);
 
 /*check_map.c*/
 void	copy_map(t_map *map, char **argv);

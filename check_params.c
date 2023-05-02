@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/02 10:23:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:53:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	load_color(t_map *map, char *str, int i)
 	tmp = triple_strjoin(split[0], split[1], split[2]);
 	if (ft_atol_check(tmp) == 0)
 		map->f = ft_atol(tmp);
+		map->f = ft_putdigit_base(map->f, 16);
+	printf("f = %d\n", map->f);
 	free(tmp);
 	free_split(split);
 }	

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/02 10:38:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:52:19 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,18 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 	}
 	mlx_destroy_window(mlx->display, mlx->win);
 	mlx_destroy_display(mlx->display);
+}
+
+int	ft_putdigit_base(size_t nbr, int base)
+{
+	char *hexa = "0123456789abcdef";
+	if (nbr < 0)
+	{
+		nbr *= - 1;
+		write(1, "-", 1);
+	}
+	if (nbr >= base)
+		ft_putdigit_base((nbr / base), base);
+	nbr = hexa[nbr % base];
+	return (nbr);
 }
