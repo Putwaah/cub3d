@@ -17,9 +17,9 @@ void	init_struct(t_map *map)
 {
 	static int	z = -1;
 
-	map->floor = NULL;
+	//map->floor = NULL;
 	map->f = 0;
-	map->ceiling = NULL;
+	//map->ceiling = NULL;
 	map->c = 0;
 	map->nor = 0;
 	map->sou = 0;

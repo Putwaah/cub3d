@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-void	check_params(t_map *map, char **argv)
+void check_params(t_map *map, char **argv)
 {
-	int	i;
-	int	tmp;
+	int i;
+	int tmp;
 
 	map->fd = open(argv[1], O_RDONLY);
 	tmp = map->line;
@@ -32,7 +32,7 @@ void	check_params(t_map *map, char **argv)
 	i = 0;
 	map->fd = open(argv[1], O_RDONLY);
 	while (i < (map->line - tmp) - 2)
-	{	
+	{
 		map->param_cpy[i] = get_next_line(map->fd);
 		i++;
 	}
@@ -41,11 +41,11 @@ void	check_params(t_map *map, char **argv)
 	init_params(map);
 }
 
-void	load_texture(t_map *map, char *str, int i, int dir)
+void load_texture(t_map *map, char *str, int i, int dir)
 {
-	char	*tmp;
-	int		w;
-	int		h;
+	char *tmp;
+	int w;
+	int h;
 
 	w = WIDTH;
 	h = HEIGHT;
@@ -57,19 +57,29 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	free(tmp);
 }
 
-void	load_color(t_map *map, char *str, int i)
+void load_color(t_map *map, char *str, int i)
 {
-	char	*tmp;
-	char	**split;
+	char *tmp;
+	char **split;
+	int	r;
+	int	v;
+	int	b;
 
 	tmp = megatrim(map, str, i);
 	split = ft_split(tmp, ',');
 	free(tmp);
-	tmp = triple_strjoin(split[0], split[1], split[2]);
-	if (ft_atol_check(tmp) == 0)
-		map->f = ft_atol(tmp);
-		map->f = ft_putdigit_base(map->f, 16);
-	printf("f = %d\n", map->f);
-	free(tmp);
+	r = ft_atoi(split[0]) % 255;
+	v = ft_atoi(split[1]) % 255;
+	b = ft_atoi(split[2]) % 255;
+	if (str[0] == 'F')
+		map->floor = (r << 16) | (v << 8) | b; 
+	else
+		map->ceiling = (r << 16) | (v << 8) | b;;
+	// tmp = triple_strjoin(split[0], split[1], split[2]);
+	// if (ft_atol_check(tmp) == 0)
+	//	map->f = ft_atol(tmp);
+	//	map->f = ft_putdigit_base(map->f, 16);
+	// printf("f = %d\n", map->f);
+	//free(tmp);
 	free_split(split);
-}	
+}

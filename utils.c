@@ -31,10 +31,11 @@ void	free_map(t_map *map)
 			free (map->tex[z]);
 		free (map->tex);
 	}
-	if (map->floor != NULL)
+	/*if (map->floor != NULL)
 		free (map->floor);
 	if (map->ceiling != NULL)
 		free (map->ceiling);
+	*/
 }	
 
 void	line_counter(t_map *map)
@@ -96,8 +97,8 @@ void	b_null(t_map *map)
 	map->mlx = NULL;
 	map->frame = NULL;
 	map->tex = NULL;
-	map->ceiling = NULL;
-	map->floor = NULL;
+	//map->ceiling = NULL;
+	//map->floor = NULL;
 }
 
 void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)

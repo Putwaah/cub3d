@@ -88,9 +88,11 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char	*floor;
+	//char	*floor;
+	unsigned int	floor;
+	//char	*ceiling;
+	unsigned int	ceiling;
 	int		f;
-	char	*ceiling;
 	int		c;
 	int		nor;
 	int		sou;

@@ -130,22 +130,22 @@ void    calc_draw_params(t_rayKsting *data, t_player *player)
 
 void    draw_roof(t_map *map, int draw_start, int *y, int x)
 {
-    unsigned int    color = 0x000000;
+    //unsigned int    color = 0x000000;
     
     while (*y < draw_start)
     {
-        set_pixel(map->frame, x, *y, color);
+        set_pixel(map->frame, x, *y, map->ceiling);
         *y += 1;
     }
 }
 
 void    draw_floor(t_map *map, int *y, int x)
 {
-    unsigned int    color = 0x882222;
+    //unsigned int    color = 0x882222;
     
     while (*y < HEIGHT)
     {
-        set_pixel(map->frame, x, *y, color);
+        set_pixel(map->frame, x, *y, map->floor);
         *y += 1;
     }
 }
