@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/20 08:40:10 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/02 10:23:00 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ void	check_params(t_map *map, char **argv)
 	map->line = 0;
 	line_counter(map);
 	close(map->fd);
-	map->param_cpy = malloc(sizeof(char *) * (map->line - tmp) + 1);
+	if (map->line - tmp < 6)
+	{
+		free_map(map);
+		printf("Error line \n");
+		exit(0);
+	}
+	map->param_cpy = malloc(sizeof(char *) * (map->line - tmp));
 	i = 0;
 	map->fd = open(argv[1], O_RDONLY);
 	while (i < (map->line - tmp) - 2)
