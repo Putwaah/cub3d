@@ -28,17 +28,20 @@ void check_params(t_map *map, char **argv)
 		printf("Error line \n");
 		exit(0);
 	}
-	map->param_cpy = malloc(sizeof(char *) * (map->line - tmp));
+	map->param_cpy = calloc(sizeof(char *), (map->line - tmp));
 	i = 0;
 	map->fd = open(argv[1], O_RDONLY);
+	printf("%d\n", map->line - tmp);
 	while (i < (map->line - tmp) - 2)
 	{
 		map->param_cpy[i] = get_next_line(map->fd);
 		i++;
 	}
-	map->param_cpy[i] = NULL;
+	//map->param_cpy[i] = NULL;
 	close(map->fd);
 	init_params(map);
+	free_loop(map->param_cpy);
+	//map->param_cpy = NULL;
 }
 
 void load_texture(t_map *map, char *str, int i, int dir)

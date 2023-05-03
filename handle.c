@@ -117,7 +117,10 @@ int	press_key(int key, void *param)
 	
 	game = (t_game *)param;
 	if (key == XK_Escape)
+	{
+		free (game->player);
 		end_game(game->map);
+	}
 	else if (key == XK_w)
 		move_forward(game->map, game->player);
 	else if (key == XK_d)

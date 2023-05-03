@@ -19,7 +19,7 @@ t_map	*parsing(int argc, char **argv)
 	if (argc != 2)
 	{
 		printf("Error arguments\n");
-		return (NULL);
+		exit (0);
 	}
 	map = malloc(sizeof(t_map) * 1);
 	if (!map)

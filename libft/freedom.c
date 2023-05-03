@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-/*void	free_loop(char **str)
+void	free_loop(char **str)
 {
 	int	z;
 
@@ -26,8 +27,9 @@
 		}
 		free (str);
 	}
+	printf("%d\n", z);
 	str = NULL;
-}*/
+}
 
 void	mega_free(char *s1, char *s2, char *s3, char *s4)
 {

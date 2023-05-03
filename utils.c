@@ -18,11 +18,11 @@ void	free_map(t_map *map)
 
 	z = -1;
 	if (map->map_cpy != NULL)
-		free (map->map_cpy);
-	if (map->param_cpy != NULL)
-		free (map->param_cpy);
-	if (map->mlx != NULL)
-		free (map->mlx);
+		free_loop(map->map_cpy);
+	//if (map->param_cpy != NULL)
+	//	free_loop(map->param_cpy);
+	//if (map->mlx != NULL)
+	//	free (map->mlx);
 	if (map->frame != NULL)
 		free (map->frame);
 	if (map->tex != NULL)
@@ -31,6 +31,7 @@ void	free_map(t_map *map)
 			free (map->tex[z]);
 		free (map->tex);
 	}
+	free (map);
 	/*if (map->floor != NULL)
 		free (map->floor);
 	if (map->ceiling != NULL)
@@ -62,11 +63,15 @@ void	line_counter(t_map *map)
 char	*megatrim(t_map *map, const char *id, int i)
 {
 	char	*rtn;
+	char	*tmp;
 
-	rtn = ft_strtrim(map->param_cpy[i], id);
-	rtn = ft_strtrim(rtn, "\n");
-	rtn = ft_strtrim(rtn, "\t");
-	rtn = ft_strtrim(rtn, " ");
+	tmp = ft_strtrim(map->param_cpy[i], id);
+	rtn = ft_strtrim(tmp, "\n");
+	free (tmp);
+	tmp = ft_strtrim(rtn, "\t");
+	free (rtn);
+	rtn = ft_strtrim(tmp, " ");
+	free (tmp);
 	return (rtn);
 }
 
@@ -112,8 +117,10 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 		if (tex[z]->img != NULL)
 			mlx_destroy_image(mlx->display, tex[z]->img);
 	}
+	mlx_loop_end(mlx->display);
 	mlx_destroy_window(mlx->display, mlx->win);
 	mlx_destroy_display(mlx->display);
+	free (mlx);
 }
 
 int	ft_putdigit_base(size_t nbr, int base)
