@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/02 15:43:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/03 13:01:01 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	check_map(t_map *map)
 	{
 		while (map->map_cpy[0][j] && (map->map_cpy[0][j] == '1' || map->map_cpy[0][j] == ' '))
 		{
-				if (map->map_cpy[0][j] == ' ' && map->map_cpy[1][j] != '1')
+				if (map->map_cpy[0][j] == ' ' && map->map_cpy[1][j] != '1' && map->map_cpy[1][j] != ' ')
 			{	
 				printf("Map Error 3 \n");
 				free_map(map);
@@ -85,7 +85,7 @@ void	check_map(t_map *map)
 					free_map(map);
 					exit(1);
 				}
-				if (map->map_cpy[i][j] == ' ' && map->map_cpy[i - 1][j] == '0')
+				if (map->map_cpy[i][j] == ' ' && (map->map_cpy[i - 1][j] == '0' || map->map_cpy[i + 1][j] == '0' || map->map_cpy[i][j - 1] == '0' || map->map_cpy[i][j + 1] == '0'))
 				{
 					printf("Map Error 6\n");
 					free_map(map);
