@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:06:47 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:11:44 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct s_game
 /*init.c*/
 void			init_struct(t_map *map);
 void			init_params(t_map *map);
+void			init_the_mlx(t_map *map);
+t_player		*init_player_data(char **map);
 
 /*utils.c*/
 void			free_map(t_map *map);	
