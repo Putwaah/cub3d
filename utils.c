@@ -19,6 +19,8 @@ void	free_map(t_map *map)
 	z = -1;
 	if (map->map_cpy != NULL)
 		free_loop(map->map_cpy);
+	if (map->param_cpy != NULL)
+		free_loop(map->param_cpy);
 	if (map->frame != NULL)
 		free (map->frame);
 	if (map->tex != NULL)

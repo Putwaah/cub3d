@@ -13,19 +13,6 @@
 #include "cub3d.h"
 #include "libft/libft.h"
 
-static void	free_param(t_map *map, int tmp)
-{
-	int	i;
-
-	i = 0;
-	while (i < (map->line - tmp) + 1)
-	{
-		free (map->param_cpy[i]);
-		i++;
-	}
-	free (map->param_cpy);
-}	
-
 void	check_params(t_map *map, char **argv)
 {
 	int	i;
@@ -52,7 +39,6 @@ void	check_params(t_map *map, char **argv)
 	}
 	close(map->fd);
 	init_params(map);
-	free_param(map, tmp);
 }
 
 void	load_texture(t_map *map, char *str, int i, int dir)
@@ -71,6 +57,44 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 			&map->tex[dir]->bpp, &map->tex[dir]->line_len,
 			&map->tex[dir]->endian);
 	free(tmp);
+}
+
+static int	tab_count(char **to_count)
+{
+	int	z;
+
+	z = 0;
+	while (to_count[z])
+		z++;
+	return (z);
+}
+
+static void	check_colors(t_map *map, char **colors)
+{	
+	int	z;
+	int	y;
+
+	z = 0;
+	y = 0;
+	if (tab_count(colors) != 3 || tab_count(colors) > 10)
+	{
+		free_loop(colors);
+		end_game(map);
+	}
+	while (colors[z])
+	{
+		while (colors[z][y])
+		{
+			if (colors[z][y] < '0' || colors[z][y] > '9')
+			{
+				free_loop(colors);
+				end_game(map);
+			}
+			y++;
+		}
+		y = 0;
+		z++;
+	}
 }
 
 void	load_color(t_map *map, char *str, int i)
