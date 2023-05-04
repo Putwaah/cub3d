@@ -23,7 +23,7 @@ void	init_struct(t_map *map)
 	map->wes = 0;
 	map->eas = 0;
 	b_null(map);
-	map->mlx = malloc(sizeof(t_mlx));
+	/*map->mlx = malloc(sizeof(t_mlx));
 	map->frame = malloc(sizeof(t_img));
 	map->tex = malloc(4 * sizeof(t_img *));
 	while (++z < 4)
@@ -34,7 +34,7 @@ void	init_struct(t_map *map)
 		free_map(map);
 		exit (69);
 	}
-	init_the_mlx(map);
+	init_the_mlx(map);*/
 	map->pos = 0;
 }
 
@@ -68,6 +68,11 @@ void	init_params_bis(t_map *map, int i)
 
 void	init_params_ter(t_map *map, int i)
 {
+	int	z;
+	
+	z = -1;
+	if (i == 0)
+		init_the_mlx(map);
 	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
 		load_texture(map, "NO ", i, 0);
 	if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
@@ -112,15 +117,21 @@ void	init_the_mlx(t_map *map)
 	int		z;
 
 	z = -1;
-	mlx = map->mlx;
-	mlx->display = mlx_init();
-	if (!mlx->display)
+	//mlx = map->mlx;
+	map->mlx = malloc(sizeof(t_mlx));
+	map->mlx->display = mlx_init();
+	if (!map->mlx->display)
 	{
-		free_map(map);
+		end_game(map);
 		exit (69);
 	}
-	mlx->win = mlx_new_window(mlx->display, WIDTH, HEIGHT, "fnetre");
-	map->frame->img = mlx_new_image(mlx->display, WIDTH, HEIGHT);
+	map->frame = malloc(sizeof(t_img));
+	map->tex = malloc(4 * sizeof(t_img *));
+	while (++z < 4)
+		map->tex[z] = malloc(sizeof(t_img));
+	z = -1;
+	map->mlx->win = mlx_new_window(map->mlx->display, WIDTH, HEIGHT, "fnetre");
+	map->frame->img = mlx_new_image(map->mlx->display, WIDTH, HEIGHT);
 	map->frame->addr = mlx_get_data_addr(map->frame->img,
 			&map->frame->bpp, &map->frame->line_len,
 			&map->frame->endian);

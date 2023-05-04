@@ -102,17 +102,24 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 	int	z;
 
 	z = -1;
-	mlx_destroy_image(mlx->display, frame->img);
-	while (++z < 4)
+	if(frame != NULL)
+		mlx_destroy_image(mlx->display, frame->img);
+	if (tex != NULL)
 	{
-		if (tex[z]->img != NULL)
-			mlx_destroy_image(mlx->display, tex[z]->img);
+		while (++z < 4)
+		{
+			if (tex[z]->img != NULL)
+				mlx_destroy_image(mlx->display, tex[z]->img);
+		}
 	}
-	mlx_loop_end(mlx->display);
-	mlx_destroy_window(mlx->display, mlx->win);
-	mlx_destroy_display(mlx->display);
-	free (mlx->display);
-	free (mlx);
+	if (mlx != NULL)
+	{	
+		mlx_loop_end(mlx->display);
+		mlx_destroy_window(mlx->display, mlx->win);
+		mlx_destroy_display(mlx->display);
+		free (mlx->display);
+		free (mlx);
+	}
 }
 
 void	error_msg(t_map *map)
