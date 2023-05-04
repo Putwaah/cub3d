@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 08:27:12 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/02 12:06:15 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:15:35 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -44,10 +44,12 @@ char	*dnextl(char *buf)
 	i++;
 	while (buf[i])
 		rtn[j++] = buf[i++];
-	
 	free(buf);
 	if (rtn[0] == '\0')
-		return(free(rtn), NULL);
+	{
+		free(rtn);
+		rtn = NULL;
+	}
 	return (rtn);
 }	
 
@@ -121,4 +123,3 @@ char	*get_next_line(int fd)
 	buf = dnextl(buf);
 	return (line);
 }
-

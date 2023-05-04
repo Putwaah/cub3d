@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/02 15:52:19 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:17:22 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void	b_null(t_map *map)
 	map->mlx = NULL;
 	map->frame = NULL;
 	map->tex = NULL;
-	//map->ceiling = NULL;
-	//map->floor = NULL;
 }
 
 void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)

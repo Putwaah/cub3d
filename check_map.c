@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/03 13:01:01 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:04:40 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	check_map(t_map *map)
 		i++;
 	}
 	i = 1;
-	while (i < map->line - 2)
+	while (i < map->line - 1)
 	{
 		j = 0;
 		while (map->map_cpy[i][j] != '\n')
@@ -96,7 +96,7 @@ void	check_map(t_map *map)
 					|| map->map_cpy[i][j] == 'E'
 					|| map->map_cpy[i][j] == 'W')
 					&& map->pos != 1)
-					map->pos = 1;
+						map->pos = 1;
 				else if ((map->map_cpy[i][j] == 'N'
 					|| map->map_cpy[i][j] == 'S'
 					|| map->map_cpy[i][j] == 'E'
@@ -114,7 +114,6 @@ void	check_map(t_map *map)
 		i++;
 	}
 	j = 0;
-	i++;
 	while (map->map_cpy[i][j])
 	{
 		if (map->map_cpy[i][j] != '1')
@@ -122,17 +121,9 @@ void	check_map(t_map *map)
 			if (map->map_cpy[i][j] == ' ' && (map->map_cpy[i - 1][j] == '1'
 				|| (map->map_cpy[i - 1][j] == ' ')))
 				j++;
-			if (map->map_cpy[i][j] == '0' || (map->map_cpy[i][j] == ' '
-				&& (map->map_cpy[i - 1][j] == '1'
-				|| map->map_cpy[i - 1][j] == ' ')))
+			if (map->map_cpy[i][j] == ' ' && map->map_cpy[i - 1][j] == '0')
 			{
 				printf("Map Error 7\n");
-				free_map(map);
-				exit(1);
-			}
-			if ((map->map_cpy[i][j] == ' ' && map->map_cpy[i - 1][j] != '1'))
-			{
-				printf("Map Error 8\n");
 				free_map(map);
 				exit(1);
 			}

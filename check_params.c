@@ -6,11 +6,12 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/02 15:53:00 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:31:37 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft/libft.h"
 
 void check_params(t_map *map, char **argv)
 {
@@ -28,20 +29,17 @@ void check_params(t_map *map, char **argv)
 		printf("Error line \n");
 		exit(0);
 	}
-	map->param_cpy = calloc(sizeof(char *), (map->line - tmp));
+	map->param_cpy = ft_calloc(sizeof(char *), (map->line - tmp) + 1);
 	i = 0;
 	map->fd = open(argv[1], O_RDONLY);
-	printf("%d\n", map->line - tmp);
-	while (i < (map->line - tmp) - 2)
+	while (i < (map->line - tmp))
 	{
 		map->param_cpy[i] = get_next_line(map->fd);
 		i++;
 	}
-	//map->param_cpy[i] = NULL;
 	close(map->fd);
 	init_params(map);
 	free_loop(map->param_cpy);
-	//map->param_cpy = NULL;
 }
 
 void load_texture(t_map *map, char *str, int i, int dir)
@@ -74,15 +72,15 @@ void load_color(t_map *map, char *str, int i)
 	r = ft_atoi(split[0]) % 255;
 	v = ft_atoi(split[1]) % 255;
 	b = ft_atoi(split[2]) % 255;
+	if (!r || !v || !b)
+	{
+		end_game(map);
+		printf("Error\n");
+		exit(1);
+	}	
 	if (str[0] == 'F')
 		map->floor = (r << 16) | (v << 8) | b; 
 	else
-		map->ceiling = (r << 16) | (v << 8) | b;;
-	// tmp = triple_strjoin(split[0], split[1], split[2]);
-	// if (ft_atol_check(tmp) == 0)
-	//	map->f = ft_atol(tmp);
-	//	map->f = ft_putdigit_base(map->f, 16);
-	// printf("f = %d\n", map->f);
-	//free(tmp);
+		map->ceiling = (r << 16) | (v << 8) | b;
 	free_split(split);
 }
