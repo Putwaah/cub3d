@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 10:51:04 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:20:06 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ void	free_map(t_map *map)
 	z = -1;
 	if (map->map_cpy != NULL)
 		free_loop(map->map_cpy);
-	//if (map->param_cpy != NULL)
-	//	free_loop(map->param_cpy);
-	//if (map->mlx != NULL)
-	//	free (map->mlx);
 	if (map->frame != NULL)
 		free (map->frame);
 	if (map->tex != NULL)
@@ -32,11 +28,6 @@ void	free_map(t_map *map)
 		free (map->tex);
 	}
 	free (map);
-	/*if (map->floor != NULL)
-		free (map->floor);
-	if (map->ceiling != NULL)
-		free (map->ceiling);
-	*/
 }	
 
 void	line_counter(t_map *map)
@@ -88,7 +79,7 @@ void	free_split(char **str)
 	free(str);
 }	
 
-void	end_game(t_map *map) //free tout et exit
+void	end_game(t_map *map) 
 {
 	destroy_the_mlx(map->mlx, map->frame, map->tex);
 	free_map(map);
@@ -120,19 +111,11 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 	mlx_destroy_display(mlx->display);
 	free (mlx->display);
 	free (mlx);
-	
 }
 
-int	ft_putdigit_base(size_t nbr, int base)
+void	error_msg(t_map *map)
 {
-	char *hexa = "0123456789abcdef";
-	if (nbr < 0)
-	{
-		nbr *= - 1;
-		write(1, "-", 1);
-	}
-	if (nbr >= base)
-		ft_putdigit_base((nbr / base), base);
-	nbr = hexa[nbr % base];
-	return (nbr);
-}
+	printf("Error\n");
+	free_map(map);
+	exit(1);
+}	

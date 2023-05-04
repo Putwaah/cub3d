@@ -6,20 +6,17 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/19 16:18:12 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:59:36 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 void	init_struct(t_map *map)
 {
 	static int	z = -1;
 
-	//map->floor = NULL;
 	map->f = 0;
-	//map->ceiling = NULL;
 	map->c = 0;
 	map->nor = 0;
 	map->sou = 0;
@@ -95,12 +92,12 @@ void	init_params(t_map *map)
 		init_params_bis(map, i);
 		i++;
 	}
-	/*if (map->nor + map->sou + map->wes + map->eas + map->c + map->f != 6)
+	if (map->nor + map->sou + map->wes + map->eas + map->c + map->f != 6)
 	{
 		printf("Error params\n");
 		free_map(map);
 		exit (1);
-	}*/
+	}
 	i = 0;
 	while (map->param_cpy[i] != NULL)
 	{
@@ -124,7 +121,9 @@ void	init_the_mlx(t_map *map)
 	}
 	mlx->win = mlx_new_window(mlx->display, WIDTH, HEIGHT, "fnetre");
 	map->frame->img = mlx_new_image(mlx->display, WIDTH, HEIGHT);
-	map->frame->addr = mlx_get_data_addr(map->frame->img, &map->frame->bpp, &map->frame->line_len, &map->frame->endian);
+	map->frame->addr = mlx_get_data_addr(map->frame->img,
+			&map->frame->bpp, &map->frame->line_len,
+			&map->frame->endian);
 	while (++z < 4)
 		map->tex[z]->img = NULL;
 }
@@ -175,7 +174,8 @@ t_player	*init_player_data(char **map)
 	{
 		while (map[x][y] && found == 0)
 		{
-			if (map[x][y] == 'N' || map[x][y] == 'S' || map[x][y] == 'E' || map[x][y] == 'W')
+			if (map[x][y] == 'N' || map[x][y] == 'S'
+				|| map[x][y] == 'E' || map[x][y] == 'W')
 			{	
 				init_dir(map[x][y], player);
 				found = 1;

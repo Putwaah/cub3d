@@ -6,17 +6,30 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 10:48:16 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:57:29 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "libft/libft.h"
 
-void check_params(t_map *map, char **argv)
+static void	free_param(t_map *map, int tmp)
 {
-	int i;
-	int tmp;
+	int	i;
+
+	i = 0;
+	while (i < (map->line - tmp) + 1)
+	{
+		free (map->param_cpy[i]);
+		i++;
+	}
+	free (map->param_cpy);
+}	
+
+void	check_params(t_map *map, char **argv)
+{
+	int	i;
+	int	tmp;
 
 	map->fd = open(argv[1], O_RDONLY);
 	tmp = map->line;
@@ -30,7 +43,6 @@ void check_params(t_map *map, char **argv)
 		exit(0);
 	}
 	map->param_cpy = ft_calloc(sizeof(char *), (map->line - tmp) + 1);
-	printf("line_map: %d\n", map->line - tmp + 1);
 	i = 0;
 	map->fd = open(argv[1], O_RDONLY);
 	while (i < (map->line - tmp))
@@ -40,22 +52,14 @@ void check_params(t_map *map, char **argv)
 	}
 	close(map->fd);
 	init_params(map);
-	i = 0;
-	while (i < (map->line - tmp) + 1)
-	{
-		free (map->param_cpy[i]);
-		i++;
-	}
-	printf("%d\n", i);
-	free (map->param_cpy);
-	//free_loop(map->param_cpy);
+	free_param(map, tmp);
 }
 
-void load_texture(t_map *map, char *str, int i, int dir)
+void	load_texture(t_map *map, char *str, int i, int dir)
 {
-	char *tmp;
-	int w;
-	int h;
+	char	*tmp;
+	int		w;
+	int		h;
 
 	w = WIDTH;
 	h = HEIGHT;
@@ -63,17 +67,19 @@ void load_texture(t_map *map, char *str, int i, int dir)
 	if (access(tmp, F_OK) != 0)
 		end_game(map);
 	map->tex[dir]->img = mlx_xpm_file_to_image(map->mlx->display, tmp, &w, &h);
-	map->tex[dir]->addr = mlx_get_data_addr(map->tex[dir]->img, &map->tex[dir]->bpp, &map->tex[dir]->line_len, &map->tex[dir]->endian);
+	map->tex[dir]->addr = mlx_get_data_addr(map->tex[dir]->img,
+			&map->tex[dir]->bpp, &map->tex[dir]->line_len,
+			&map->tex[dir]->endian);
 	free(tmp);
 }
 
-void load_color(t_map *map, char *str, int i)
+void	load_color(t_map *map, char *str, int i)
 {
-	char *tmp;
-	char **split;
-	int	r;
-	int	v;
-	int	b;
+	char	*tmp;
+	char	**split;
+	int		r;
+	int		v;
+	int		b;
 
 	tmp = megatrim(map, str, i);
 	split = ft_split(tmp, ',');
@@ -82,7 +88,7 @@ void load_color(t_map *map, char *str, int i)
 	v = ft_atoi(split[1]) % 256;
 	b = ft_atoi(split[2]) % 256;
 	if (str[0] == 'F')
-		map->floor = (r << 16) | (v << 8) | b; 
+		map->floor = (r << 16) | (v << 8) | b;
 	else
 		map->ceiling = (r << 16) | (v << 8) | b;
 	free_split(split);
