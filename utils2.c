@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:34:19 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:35:59 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:44:28 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,32 @@ void	error_msg(t_map *map)
 	printf("Error\n");
 	end_game(map);
 	exit(1);
+}
+
+void	clear_frame(t_img *frame)
+{
+	int		x;
+	int		y;
+	char	*pix;
+
+	x = -1;
+	y = -1;
+	while (++x < WIDTH)
+	{
+		while (++y < HEIGHT)
+		{
+			pix = frame->addr + (y * frame->line_len + x * (frame->bpp / 8));
+			if (frame->bpp == 32)
+				*(int *)pix = 0;
+			else if (frame->bpp == 24)
+			{
+				*(pix) = 0;
+				*(pix + 1) = 0;
+				*(pix + 2) = 0;
+			}
+			y++;
+		}
+		y = 0;
+		x++;
+	}
 }

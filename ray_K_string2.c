@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:53:17 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:06:48 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:45:25 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_floor(t_map *map, int *y, int x)
 	}
 }
 
-void    draw(t_rayksting *data, t_map *map, t_player *player, int x)
+void	draw(t_rayksting *data, t_map *map, t_player *player, int x)
 {
 	int				y;
 	int				d;
@@ -86,35 +86,7 @@ void    draw(t_rayksting *data, t_map *map, t_player *player, int x)
 	draw_floor(map, &y, x);
 }
 
-void	clear_frame(t_img *frame)
-{
-	int		x;
-	int		y;
-	char	*pix;
-
-	x = -1;
-	y = -1;
-	while (++x < WIDTH)
-	{
-		while (++y < HEIGHT)
-		{
-			pix = frame->addr + (y * frame->line_len + x * (frame->bpp / 8));
-			if (frame->bpp == 32)
-				*(int *)pix = 0;
-			else if (frame->bpp == 24)
-			{
-				*(pix) = 0;
-				*(pix + 1) = 0;
-				*(pix + 2) = 0;
-			}
-			y++;
-		}
-		y = 0;
-		x++;
-	}
-}
-
-void    ray_k_string(t_map *map, t_player *player)
+void	ray_k_string(t_map *map, t_player *player)
 {
 	int			x;
 	int			y;

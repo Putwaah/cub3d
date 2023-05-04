@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:38:49 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:44:42 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void			end_game(t_map *map);
 void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
 void			b_null(t_map *map);
 void			error_msg(t_map *map);
+void			clear_frame(t_img *frame);
 
 /*check_map.c*/
 void			check_map(t_map *map);
@@ -172,7 +173,6 @@ void			calc_draw_params(t_rayksting *data, t_player *player);
 void			draw_roof(t_map *map, int draw_start, int *y, int x);
 void			draw_floor(t_map *map, int *y, int x);
 void			draw(t_rayksting *data, t_map *map, t_player *player, int x);
-void			clear_frame(t_img *frame);
 void			ray_k_string(t_map *map, t_player *player);
 
 #endif
