@@ -47,8 +47,8 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	int		w;
 	int		h;
 
-	w = WIDTH;
-	h = HEIGHT;
+	w = TEX_WIDTH;
+	h = TEX_HEIGHT;
 	tmp = megatrim(map, str, i);
 	if (access(tmp, F_OK) != 0)
 	{
@@ -56,6 +56,8 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 		end_game(map);
 	}
 	map->tex[dir]->img = mlx_xpm_file_to_image(map->mlx->display, tmp, &w, &h);
+	if (!map->tex[dir]->img)
+		end_game(map);
 	map->tex[dir]->addr = mlx_get_data_addr(map->tex[dir]->img,
 			&map->tex[dir]->bpp, &map->tex[dir]->line_len,
 			&map->tex[dir]->endian);
