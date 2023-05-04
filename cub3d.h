@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 14:33:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:00:03 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,50 +112,56 @@ typedef struct s_game
 }			t_game;
 
 /*init.c*/
-void		init_struct(t_map *map);
-void		init_params(t_map *map);
+void			init_struct(t_map *map);
+void			init_params(t_map *map);
 
 /*utils.c*/
-void		free_map(t_map *map);	
-void		line_counter(t_map *map);
-int			ft_tablen(char **str);
-char		*megatrim(t_map *map, const char *id, int i);
-void		free_split(char **str);
-void		error_msg(t_map *map);
+void			free_map(t_map *map);	
+void			line_counter(t_map *map);
+char			*megatrim(t_map *map, const char *id, int i);
+void			free_split(char **str);
+void			end_game(t_map *map);
+void			b_null(t_map *map);
+void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
+void			error_msg(t_map *map);
 
 /*check_map.c*/
-void		check_map(t_map *map);
+void			check_map(t_map *map);
 
 /*check_map2.c*/
-void		copy_map(t_map *map, char **argv);
-void		copy_map_utils(t_map *map, char *gnl);
-void		open_and_copy(char **argv, t_map *map);
-int			check_first_line(t_map *map, int *j);
-int			check_first_line_bis(t_map *map, int *i, int *j);
+void			copy_map(t_map *map, char **argv);
+void			copy_map_utils(t_map *map, char *gnl);
+void			open_and_copy(char **argv, t_map *map);
+int				check_first_line(t_map *map, int *j);
+int				check_first_line_bis(t_map *map, int *i, int *j);
+
 /*check_params.c*/
-void		check_params(t_map *map, char **argv);
-void		load_texture(t_map *map, char *str, int i, int dir);
-void		load_color(t_map *map, char *str, int i);
+void			check_params(t_map *map, char **argv);
+void			load_texture(t_map *map, char *str, int i, int dir);
+void			load_color(t_map *map, char *str, int i);
 
 /*handle.c*/
-void		move_forward(t_map *map, t_player *player);
-void		move_backward(t_map *map, t_player *player);
-void		move_left(t_map	*map, t_player	*player);
-void		move_right(t_map *map, t_player *player);
-void		move_view_right(t_map *map, t_player *player);
+void			move_forward(t_map *map, t_player *player);
+void			move_backward(t_map *map, t_player *player);
+void			move_left(t_map	*map, t_player	*player);
+void			move_right(t_map *map, t_player *player);
+void			move_view_right(t_map *map, t_player *player);
 
 /*handle2.c*/
-void		move_view_left(t_map *map, t_player *player);
-int			press_key(int key, void *param);
-int			press_key(int key, void *param);
-int			release_key(int key, void *param);
+void			move_view_left(t_map *map, t_player *player);
+int				press_key(int key, void *param);
+int				press_key(int key, void *param);
+int				release_key(int key, void *param);
 
 /*ray_K_string.c*/
-void		destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
-void		b_null(t_map *map);
-void		end_game(t_map *map);
-void		init_the_mlx(t_map *map);
-t_player	*init_player_data(char **map);
-void		ray_k_string(t_map *map, t_player *player);
+void			set_pixel(t_img *frame, int x, int y, unsigned int color);
+unsigned int	get_pixel(t_img *tex, int x, int y);
+void			calc_step(t_rayKsting *data, t_player *player);
+void			rayKsting_init(t_player *player, t_rayKsting *data, int x);
+void			dda(t_rayKsting *data, char **map);
 
+/*ray_K_string2.c*/
+void			move_view_left(t_map *map, t_player *player);
+int				press_key(int key, void *param);
+int				release_key(int key, void *param);
 #endif
