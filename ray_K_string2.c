@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	calc_draw_params(t_rayKsting *data, t_player *player)
+void	calc_draw_params(t_rayksting *data, t_player *player)
 {
 	data->pitch = 100;
 	data->draw_start = -data->line_height / 2 + HEIGHT / 2 + data->pitch;
@@ -60,7 +60,7 @@ void	draw_floor(t_map *map, int *y, int x)
 	}
 }
 
-void    draw(t_rayKsting *data, t_map *map, t_player *player, int x)
+void    draw(t_rayksting *data, t_map *map, t_player *player, int x)
 {
 	int				y;
 	int				d;
@@ -119,12 +119,12 @@ void    ray_k_string(t_map *map, t_player *player)
 {
 	int			x;
 	int			y;
-	t_rayKsting	ray_data;
+	t_rayksting	ray_data;
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		rayKsting_init(player, &ray_data, x);
+		rayksting_init(player, &ray_data, x);
 		dda(&ray_data, map->map_cpy);
 		draw(&ray_data, map, player, x);
 		x++;

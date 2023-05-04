@@ -35,7 +35,7 @@ unsigned int	get_pixel(t_img *tex, int x, int y)
 	return (*(unsigned int *)rtn);
 }
 
-void	calc_step(t_rayKsting *data, t_player *player)
+void	calc_step(t_rayksting *data, t_player *player)
 {
 	if (data->ray_dir_x < 0)
 	{
@@ -61,7 +61,7 @@ void	calc_step(t_rayKsting *data, t_player *player)
 	}
 }
 
-void	rayKsting_init(t_player *player, t_rayKsting *data, int x)
+void	rayksting_init(t_player *player, t_rayksting *data, int x)
 {
 	double	camera_x;
 
@@ -81,7 +81,7 @@ void	rayKsting_init(t_player *player, t_rayKsting *data, int x)
 	calc_step(data, player);
 }
 
-void	dda(t_rayKsting *data, char **map)
+void	dda(t_rayksting *data, char **map)
 {
 	int	hit;
 

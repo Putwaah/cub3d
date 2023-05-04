@@ -48,7 +48,7 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_rayKsting
+typedef struct s_rayksting
 {
 	double			ray_dir_x;
 	double			ray_dir_y;
@@ -72,7 +72,7 @@ typedef struct s_rayKsting
 	int				tex_y;
 	int				pitch;
 	unsigned int	color;
-}	t_rayKsting;
+}	t_rayksting;
 
 typedef struct s_player
 {
@@ -158,15 +158,15 @@ int				release_key(int key, void *param);
 /*ray_K_string.c*/
 void			set_pixel(t_img *frame, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_img *tex, int x, int y);
-void			calc_step(t_rayKsting *data, t_player *player);
-void			rayKsting_init(t_player *player, t_rayKsting *data, int x);
-void			dda(t_rayKsting *data, char **map);
+void			calc_step(t_rayksting *data, t_player *player);
+void			rayksting_init(t_player *player, t_rayksting *data, int x);
+void			dda(t_rayksting *data, char **map);
 
 /*ray_K_string2.c*/
-void			calc_draw_params(t_rayKsting *data, t_player *player);
+void			calc_draw_params(t_rayksting *data, t_player *player);
 void			draw_roof(t_map *map, int draw_start, int *y, int x);
 void			draw_floor(t_map *map, int *y, int x);
-void			draw(t_rayKsting *data, t_map *map, t_player *player, int x);
+void			draw(t_rayksting *data, t_map *map, t_player *player, int x);
 void			clear_frame(t_img *frame);
 void			ray_k_string(t_map *map, t_player *player);
 

@@ -57,7 +57,10 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	}
 	map->tex[dir]->img = mlx_xpm_file_to_image(map->mlx->display, tmp, &w, &h);
 	if (!map->tex[dir]->img)
+	{	
+		free (tmp);
 		end_game(map);
+	}
 	map->tex[dir]->addr = mlx_get_data_addr(map->tex[dir]->img,
 			&map->tex[dir]->bpp, &map->tex[dir]->line_len,
 			&map->tex[dir]->endian);
