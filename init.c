@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:11:26 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:38:35 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,10 @@ void	init_struct(t_map *map)
 	map->wes = 0;
 	map->eas = 0;
 	b_null(map);
-	/*map->mlx = malloc(sizeof(t_mlx));
-	map->frame = malloc(sizeof(t_img));
-	map->tex = malloc(4 * sizeof(t_img *));
-	while (++z < 4)
-		map->tex[z] = malloc(sizeof(t_img));
-	if (!map->mlx || !map->frame || !map->tex || !map->tex
-		|| !map->tex[0] || !map->tex[1] || !map->tex[2] || !map->tex[3])
-	{
-		free_map(map);
-		exit (69);
-	}
-	init_the_mlx(map);*/
 	map->pos = 0;
 }
 
-void	init_params_bis(t_map *map, int i)
+static void	init_params_bis(t_map *map, int i)
 {
 	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->nor == 0)
 		map->nor = 1;
@@ -66,10 +54,10 @@ void	init_params_bis(t_map *map, int i)
 		map->f = 2;
 }	
 
-void	init_params_ter(t_map *map, int i)
+static void	init_params_ter(t_map *map, int i)
 {
 	int	z;
-	
+
 	z = -1;
 	if (i == 0)
 		init_the_mlx(map);
@@ -117,7 +105,6 @@ void	init_the_mlx(t_map *map)
 	int		z;
 
 	z = -1;
-	//mlx = map->mlx;
 	map->mlx = malloc(sizeof(t_mlx));
 	map->mlx->display = mlx_init();
 	if (!map->mlx->display)
@@ -137,68 +124,4 @@ void	init_the_mlx(t_map *map)
 			&map->frame->endian);
 	while (++z < 4)
 		map->tex[z]->img = NULL;
-}
-
-static void	init_dir(char dir, t_player *player)
-{
-	if (dir == 'N')
-	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = 0.66;
-	}
-	else if (dir == 'S')
-	{
-		player->dir_x = 1;
-		player->dir_y = 0;
-		player->plane_x = 0;
-		player->plane_y = -0.66;
-	}
-	else if (dir == 'E')
-	{
-		player->dir_x = 0;
-		player->dir_y = 1;
-		player->plane_x = 0.66;
-		player->plane_y = 0;
-	}
-	else if (dir == 'W')
-	{
-		player->dir_x = 0;
-		player->dir_y = -1;
-		player->plane_x = -0.66;
-		player->plane_y = 0;
-	}
-}
-
-t_player	*init_player_data(char **map)
-{
-	t_player	*player;
-	static int	found = 0;
-	int			x;
-	int			y;
-
-	x = 0;
-	y = 0;
-	player = malloc(sizeof(t_player));
-	while (map[x] && found == 0)
-	{
-		while (map[x][y] && found == 0)
-		{
-			if (map[x][y] == 'N' || map[x][y] == 'S'
-				|| map[x][y] == 'E' || map[x][y] == 'W')
-			{	
-				init_dir(map[x][y], player);
-				found = 1;
-				player->pos_x = x + 0.5;
-				player->pos_y = y + 0.5;
-				map[x][y] = '0';
-			}
-			y++;
-		}
-		x++;
-		if (found != 1)
-			y = 0;
-	}
-	return (player);
 }

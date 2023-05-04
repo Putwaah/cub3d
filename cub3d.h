@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:11:44 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:38:49 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ typedef struct s_game
 void			init_struct(t_map *map);
 void			init_params(t_map *map);
 void			init_the_mlx(t_map *map);
+
+/*init2.c*/
+void	init_dir(char dir, t_player *player);
 t_player		*init_player_data(char **map);
 
 /*utils.c*/
@@ -123,8 +126,10 @@ void			line_counter(t_map *map);
 char			*megatrim(t_map *map, const char *id, int i);
 void			free_split(char **str);
 void			end_game(t_map *map);
-void			b_null(t_map *map);
+
+/*utils2.c*/
 void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
+void			b_null(t_map *map);
 void			error_msg(t_map *map);
 
 /*check_map.c*/
