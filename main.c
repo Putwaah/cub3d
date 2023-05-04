@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:41:28 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 14:32:41 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:05:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 	ray_k_string(game.map, game.player);
 	mlx_hook(game.map->mlx->win, 2, 1L << 0, press_key, (void *)&game);
 	mlx_hook(game.map->mlx->win, 3, 1L << 1, release_key, NULL);
+	mlx_hook(game.map->mlx->win, 17, 1L << 0, end_game_cross, (void *)&game);
 	mlx_loop(game.map->mlx->display);
 	return (0);
 }

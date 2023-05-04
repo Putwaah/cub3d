@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:35:07 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:03:55 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,11 @@ void	end_game(t_map *map)
 	destroy_the_mlx(map->mlx, map->frame, map->tex);
 	free_map(map);
 	exit (69);
+}
+
+int	end_game_cross(t_map *map)
+{
+	destroy_the_mlx(map->mlx, map->frame, map->tex);
+	free_map(map);
+	exit (1);
 }

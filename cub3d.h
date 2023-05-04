@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:44:42 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:02:57 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void			line_counter(t_map *map);
 char			*megatrim(t_map *map, const char *id, int i);
 void			free_split(char **str);
 void			end_game(t_map *map);
-
+int				end_game_cross(t_map *map);
 /*utils2.c*/
 void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
 void			b_null(t_map *map);
