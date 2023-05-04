@@ -87,10 +87,3 @@ void	end_game(t_map *map)
 	free_map(map);
 	exit (69);
 }
-
-int	end_game_cross(t_map *map)
-{
-	destroy_the_mlx(map->mlx, map->frame, map->tex);
-	free_map(map);
-	exit (1);
-}

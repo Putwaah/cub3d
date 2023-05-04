@@ -118,7 +118,7 @@ void			init_the_mlx(t_map *map);
 
 /*init2.c*/
 void	init_dir(char dir, t_player *player);
-t_player		*init_player_data(char **map);
+t_player		*init_player_data(char **map, int x, int y);
 
 /*utils.c*/
 void			free_map(t_map *map);	
@@ -126,7 +126,7 @@ void			line_counter(t_map *map);
 char			*megatrim(t_map *map, const char *id, int i);
 void			free_split(char **str);
 void			end_game(t_map *map);
-int				end_game_cross(t_map *map);
+int				end_game_cross(void *param);
 /*utils2.c*/
 void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
 void			b_null(t_map *map);

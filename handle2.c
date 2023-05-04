@@ -60,3 +60,12 @@ int	release_key(int key, void *param)
 {
 	return (0);
 }
+
+int	end_game_cross(void *param)
+{
+	t_game *game;
+
+	game = (t_game *)param;
+	end_game(game->map);
+	return (0);
+}

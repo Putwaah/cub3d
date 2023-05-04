@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	game.map = parsing(argc, argv);
-	game.player = init_player_data(game.map->map_cpy);
+	game.player = init_player_data(game.map->map_cpy, 0, 0);
 	game.player->key_release = 0;
 	ray_k_string(game.map, game.player);
 	mlx_hook(game.map->mlx->win, 2, 1L << 0, press_key, (void *)&game);

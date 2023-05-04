@@ -6,13 +6,13 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:36:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:44:03 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:39:43 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_dir(char dir, t_player *player)
+static void	north_south_init(char dir, t_player *player)
 {
 	if (dir == 'N')
 	{
@@ -27,6 +27,14 @@ void	init_dir(char dir, t_player *player)
 		player->dir_y = 0;
 		player->plane_x = 0;
 		player->plane_y = -0.66;
+	}
+}
+
+void	init_dir(char dir, t_player *player)
+{
+	if (dir == 'N' || dir == 'S')
+	{
+		north_south_init(dir, player);
 	}
 	else if (dir == 'E')
 	{
@@ -44,15 +52,11 @@ void	init_dir(char dir, t_player *player)
 	}
 }
 
-t_player	*init_player_data(char **map)
+t_player	*init_player_data(char **map, int x, int y)
 {
 	t_player	*player;
 	static int	found = 0;
-	int			x;
-	int			y;
 
-	x = 0;
-	y = 0;
 	player = malloc(sizeof(t_player));
 	while (map[x] && found == 0)
 	{
