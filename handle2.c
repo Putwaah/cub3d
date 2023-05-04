@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:26:28 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 14:56:22 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:26:09 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	release_key(int key, void *param)
 
 int	end_game_cross(void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)param;
+	free(game->player);
 	end_game(game->map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 16:02:57 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:22:30 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void			init_params(t_map *map);
 void			init_the_mlx(t_map *map);
 
 /*init2.c*/
-void	init_dir(char dir, t_player *player);
+void			init_dir(char dir, t_player *player);
 t_player		*init_player_data(char **map, int x, int y);
 
 /*utils.c*/
@@ -126,7 +126,7 @@ void			line_counter(t_map *map);
 char			*megatrim(t_map *map, const char *id, int i);
 void			free_split(char **str);
 void			end_game(t_map *map);
-int				end_game_cross(void *param);
+
 /*utils2.c*/
 void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
 void			b_null(t_map *map);
@@ -160,6 +160,7 @@ void			move_view_left(t_map *map, t_player *player);
 int				press_key(int key, void *param);
 int				press_key(int key, void *param);
 int				release_key(int key, void *param);
+int				end_game_cross(void *param);
 
 /*ray_K_string.c*/
 void			set_pixel(t_img *frame, int x, int y, unsigned int color);

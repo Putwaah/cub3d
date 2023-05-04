@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 16:44:28 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/05/03 16:18:30 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:27:16 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	free_loop(char **str)
 			free (str[z]);
 			z++;
 		}
-		printf("free_loop: %d\n", z);
 		free (str);
 	}
 	str = NULL;

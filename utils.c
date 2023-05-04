@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 16:03:55 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:24:31 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	line_counter(t_map *map)
 	ret = get_next_line(map->fd);
 	if (ret == 0)
 	{
-		printf("Error gnl\n");
+		printf("Error\n");
 		free(map);
 		exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:38:35 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:26:36 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	init_the_mlx(t_map *map)
 	while (++z < 4)
 		map->tex[z] = malloc(sizeof(t_img));
 	z = -1;
-	map->mlx->win = mlx_new_window(map->mlx->display, WIDTH, HEIGHT, "fnetre");
+	map->mlx->win = mlx_new_window(map->mlx->display, WIDTH, HEIGHT, "CUB3D");
 	map->frame->img = mlx_new_image(map->mlx->display, WIDTH, HEIGHT);
 	map->frame->addr = mlx_get_data_addr(map->frame->img,
 			&map->frame->bpp, &map->frame->line_len,
