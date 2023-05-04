@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 13:20:06 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:24:25 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,6 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 void	error_msg(t_map *map)
 {
 	printf("Error\n");
-	free_map(map);
+	end_game(map);
 	exit(1);
 }	

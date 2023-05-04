@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:53:37 by agoichon          #+#    #+#             */
-/*   Updated: 2023/04/12 10:37:49 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:25:07 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	move_forward(t_map *map, t_player *player)
 
 	next_x = player->pos_x + player->dir_x * SPEED;
 	next_y = player->pos_y + player->dir_y * SPEED;
-	//if (next_x < 0 || next_y < 0)
-	//	return ;
 	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
 	{
 		player->pos_x = next_x;
@@ -36,8 +34,6 @@ void	move_backward(t_map *map, t_player *player)
 
 	next_x = player->pos_x - player->dir_x * SPEED;
 	next_y = player->pos_y - player->dir_y * SPEED;
-	//if (next_x < 0 || next_y < 0)
-	//	return ;
 	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
 	{
 		player->pos_x = next_x;
@@ -53,9 +49,6 @@ void	move_left(t_map	*map, t_player	*player)
 
 	next_x = player->pos_x + (-player->dir_y) * SPEED;
 	next_y = player->pos_y + player->dir_x * SPEED;
-	//if (next_x < 0 || next_y < 0)
-	//	return ;
-	//printf("%f\n%f\n", player->dir_x, player->dir_y);
 	if (map->map_cpy[(int)next_x][(int)next_y] == '0')
 	{	
 		player->pos_x = next_x;

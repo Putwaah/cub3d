@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 12:57:29 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:24:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	h = HEIGHT;
 	tmp = megatrim(map, str, i);
 	if (access(tmp, F_OK) != 0)
+	{
+		free(tmp);
 		end_game(map);
+	}
 	map->tex[dir]->img = mlx_xpm_file_to_image(map->mlx->display, tmp, &w, &h);
 	map->tex[dir]->addr = mlx_get_data_addr(map->tex[dir]->img,
 			&map->tex[dir]->bpp, &map->tex[dir]->line_len,

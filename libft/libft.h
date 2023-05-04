@@ -6,7 +6,7 @@
 /*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 12:39:37 by jtoulous          #+#    #+#             */
-/*   Updated: 2023/05/02 11:59:14 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:16:29 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 char			*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
-char			*ft_strtrim(char const  *s1, const char *set);
+char			*ft_strtrim(char const *s1, const char *set);
 t_list			*ft_lstnew(char *content);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 int				ft_lstsize(t_list *lst);
@@ -98,5 +98,5 @@ char			*ft_strchr_reverse(const char *s, int c);
 long long		ft_atol(const char *nptr);
 long long		ft_atol_check(const char *nptr);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
-int			ft_double_strlen(char *line, char *buf);
+int				ft_double_strlen(char *line, char *buf);
 #endif
