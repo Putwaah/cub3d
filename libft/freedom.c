@@ -25,6 +25,7 @@ void	free_loop(char **str)
 			free (str[z]);
 			z++;
 		}
+		printf("free_loop: %d\n", z);
 		free (str);
 	}
 	str = NULL;

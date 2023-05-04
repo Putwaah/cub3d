@@ -98,4 +98,5 @@ char			*ft_strchr_reverse(const char *s, int c);
 long long		ft_atol(const char *nptr);
 long long		ft_atol_check(const char *nptr);
 char			*ft_strncat(char *dest, char *src, unsigned int nb);
+int			ft_double_strlen(char *line, char *buf);
 #endif

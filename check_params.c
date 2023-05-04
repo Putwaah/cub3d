@@ -30,6 +30,7 @@ void check_params(t_map *map, char **argv)
 		exit(0);
 	}
 	map->param_cpy = ft_calloc(sizeof(char *), (map->line - tmp) + 1);
+	printf("line_map: %d\n", map->line - tmp + 1);
 	i = 0;
 	map->fd = open(argv[1], O_RDONLY);
 	while (i < (map->line - tmp))
@@ -39,7 +40,15 @@ void check_params(t_map *map, char **argv)
 	}
 	close(map->fd);
 	init_params(map);
-	free_loop(map->param_cpy);
+	i = 0;
+	while (i < (map->line - tmp) + 1)
+	{
+		free (map->param_cpy[i]);
+		i++;
+	}
+	printf("%d\n", i);
+	free (map->param_cpy);
+	//free_loop(map->param_cpy);
 }
 
 void load_texture(t_map *map, char *str, int i, int dir)

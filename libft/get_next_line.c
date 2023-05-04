@@ -3,123 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 08:27:12 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/03 16:15:35 by agoichon         ###   ########.fr       */
+/*   Created: 2022/11/03 18:11:28 by jtoulous          #+#    #+#             */
+/*   Updated: 2022/11/03 18:11:30 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-char	*ft_joinf(char *buf, char *str)
-{
-	char	*tmp;
 
-	if (!buf || !str)
-		return (NULL);
-	tmp = ft_strjoin(buf, str);
-	free(buf);
-	return (tmp);
+char	*copy_2(char buf, char *line, char *new_line, size_t z)
+{
+	if (buf == '\n')
+		new_line[z] = '\n';
+	if (line)
+		free(line);
+	return (new_line);
 }
 
-char	*dnextl(char *buf)
+char	*copy(char *buf, char *line, size_t z, size_t y)
 {
-	int		i;
-	int		j;
-	char	*rtn;
+	char	*new_line;
 
-	i = 0;
-	j = 0;
-	if (!buf)
+	new_line = ft_calloc(ft_double_strlen(line, buf) + 1, sizeof(char));
+	if (!new_line)
+	{	
+		free (line);
 		return (NULL);
-	while (buf[i] != '\n' && buf[i])
-		i++;
-	if (!buf[i])
-	{
-		free(buf);
-		return (NULL);
-	}	
-	rtn = ft_calloc(sizeof(char), (ft_strlen(buf) - i + 1));
-	if (!rtn)
-		return (0);
-	i++;
-	while (buf[i])
-		rtn[j++] = buf[i++];
-	free(buf);
-	if (rtn[0] == '\0')
-	{
-		free(rtn);
-		rtn = NULL;
 	}
-	return (rtn);
-}	
-
-char	*rdfile(int fd, char *s)
-{
-	char	*buf;
-	int		i;
-
-	if (!s)
-		s = ft_calloc(1, 1);
-	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buf)
-		return (NULL);
-	i = 1;
-	while (i > 0)
+	if (line)
 	{
-		i = read(fd, buf, BUFFER_SIZE);
-		if (i == -1)
-		{	
-			free(buf);
-			free(s);
-			return (NULL);
+		while (line[z])
+		{
+			new_line[z] = line[z];
+			z++;
 		}
-		buf[i] = 0;
-		s = ft_joinf(s, buf);
-		if (ft_strchr(buf, '\n'))
-			break ;
 	}
-	free(buf);
-	return (s);
+	while (buf[y] && buf[y] != '\n')
+	{
+		new_line[z] = buf[y];
+		z++;
+		y++;
+	}
+	copy_2(buf[y], line, new_line, z);
+	return (new_line);
 }
 
-char	*fline(char *buf)
+int	newline_check(char *buf)
 {
-	char	*rtn;
-	int		i;
+	size_t	z;
 
-	i = 0;
-	if (!buf[i])
-		return (NULL);
-	while (buf[i] && buf[i] != '\n')
-		i++;
-	rtn = ft_calloc(sizeof(char), i + 2);
-	if (!rtn)
-		return (NULL);
-	i = 0;
-	while (buf[i] != '\n' && buf[i])
-	{	
-		rtn[i] = buf[i];
-		i++;
+	z = 0;
+	while (buf[z])
+	{
+		if (buf[z] == '\n')
+			return (1);
+		z++;
 	}
-	if (buf[i] && buf[i] == '\n')
-	{	
-		rtn[i] = '\n';
-		i++;
-	}	
-	return (rtn);
+	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;
+	static char	buf[BUFFER_SIZE + 1];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	line = NULL;
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	buf = rdfile(fd, buf);
-	if (!buf)
+	line = copy(buf, line, 0, 0);
+	if (newline_check(buf) == 1)
+	{
+		clean(buf, 0, 0);
+		return (line);
+	}
+	line = read_the_fkin_file(fd, buf, line);
+	if (!line)
 		return (NULL);
-	line = fline(buf);
-	buf = dnextl(buf);
+	clean(buf, 0, 0);
 	return (line);
 }
