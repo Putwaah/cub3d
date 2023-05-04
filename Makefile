@@ -6,7 +6,7 @@
 #    By: jtoulous <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:37:24 by jtoulous          #+#    #+#              #
-#    Updated: 2023/05/04 13:55:21 by agoichon         ###   ########.fr        #
+#    Updated: 2023/05/04 14:31:06 by agoichon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM		= @rm -f
 CLEAR	= @clear
 
 # FILE
-SRC	= ./check_map.c ./check_params.c ./handle.c ./init.c ./main.c ./ray_K_string.c ./utils.c ./check_map2.c 
+SRC	= ./check_map.c ./check_params.c ./handle.c ./init.c ./main.c ./ray_K_string.c ./utils.c ./check_map2.c ./handle2.c 
 OBJ	= $(SRC:.c=.o)
 
 #LIBFT

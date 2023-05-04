@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 13:59:12 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:33:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,15 @@ void		load_texture(t_map *map, char *str, int i, int dir);
 void		load_color(t_map *map, char *str, int i);
 
 /*handle.c*/
+void		move_forward(t_map *map, t_player *player);
+void		move_backward(t_map *map, t_player *player);
+void		move_left(t_map	*map, t_player	*player);
+void		move_right(t_map *map, t_player *player);
+void		move_view_right(t_map *map, t_player *player);
+
+/*handle2.c*/
+void		move_view_left(t_map *map, t_player *player);
+int			press_key(int key, void *param);
 int			press_key(int key, void *param);
 int			release_key(int key, void *param);
 
