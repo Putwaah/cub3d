@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 13:27:04 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:59:12 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,14 @@ void		free_split(char **str);
 void		error_msg(t_map *map);
 
 /*check_map.c*/
-void		copy_map(t_map *map, char **argv);
-void		open_and_copy(char **argv, t_map *map);
 void		check_map(t_map *map);
 
+/*check_map2.c*/
+void		copy_map(t_map *map, char **argv);
+void		copy_map_utils(t_map *map, char *gnl);
+void		open_and_copy(char **argv, t_map *map);
+int			check_first_line(t_map *map, int *j);
+int			check_first_line_bis(t_map *map, int *i, int *j);
 /*check_params.c*/
 void		check_params(t_map *map, char **argv);
 void		load_texture(t_map *map, char *str, int i, int dir);
