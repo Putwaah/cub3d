@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 10:31:37 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:48:16 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,9 @@ void load_color(t_map *map, char *str, int i)
 	tmp = megatrim(map, str, i);
 	split = ft_split(tmp, ',');
 	free(tmp);
-	r = ft_atoi(split[0]) % 255;
-	v = ft_atoi(split[1]) % 255;
-	b = ft_atoi(split[2]) % 255;
-	if (!r || !v || !b)
-	{
-		end_game(map);
-		printf("Error\n");
-		exit(1);
-	}	
+	r = ft_atoi(split[0]) % 256;
+	v = ft_atoi(split[1]) % 256;
+	b = ft_atoi(split[2]) % 256;
 	if (str[0] == 'F')
 		map->floor = (r << 16) | (v << 8) | b; 
 	else

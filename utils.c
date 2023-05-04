@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:21 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/03 16:17:22 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:51:04 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 	mlx_loop_end(mlx->display);
 	mlx_destroy_window(mlx->display, mlx->win);
 	mlx_destroy_display(mlx->display);
+	free (mlx->display);
 	free (mlx);
+	
 }
 
 int	ft_putdigit_base(size_t nbr, int base)
