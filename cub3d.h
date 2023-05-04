@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 13:59:59 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:00:03 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:06:47 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,11 @@ void			rayKsting_init(t_player *player, t_rayKsting *data, int x);
 void			dda(t_rayKsting *data, char **map);
 
 /*ray_K_string2.c*/
-void			move_view_left(t_map *map, t_player *player);
-int				press_key(int key, void *param);
-int				release_key(int key, void *param);
+void			calc_draw_params(t_rayKsting *data, t_player *player);
+void			draw_roof(t_map *map, int draw_start, int *y, int x);
+void			draw_floor(t_map *map, int *y, int x);
+void			draw(t_rayKsting *data, t_map *map, t_player *player, int x);
+void			clear_frame(t_img *frame);
+void			ray_k_string(t_map *map, t_player *player);
+
 #endif
