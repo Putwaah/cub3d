@@ -21,7 +21,6 @@ void	calc_draw_params(t_rayksting *data, t_player *player)
 	data->draw_end = data->line_height / 2 + HEIGHT / 2 + data->pitch;
 	if (data->draw_end >= HEIGHT)
 		data->draw_end = HEIGHT - 1;
-	data->tex_num = 0;
 	if (data->side == 0 && data->ray_dir_x > 0)
 		data->tex_num = 0;
 	else if (data->side == 0 && data->ray_dir_x < 0)
