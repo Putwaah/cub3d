@@ -77,14 +77,9 @@ static int	tab_count(char **to_count)
 	return (z);
 }
 
-static void	check_colors(t_map *map, char **colors)
+static void	check_colors(t_map *map, char **colors, int z, int y)
 {	
-	int	z;
-	int	y;
-
-	z = 0;
-	y = 0;
-	if (tab_count(colors) != 3 || tab_count(colors) > 10)
+	if (tab_count(colors) != 3)
 	{
 		free_loop(colors);
 		end_game(map);
@@ -93,7 +88,7 @@ static void	check_colors(t_map *map, char **colors)
 	{
 		while (colors[z][y])
 		{
-			if (colors[z][y] < '0' || colors[z][y] > '9')
+			if ((colors[z][y] < '0' || colors[z][y] > '9') && colors[z][y] != ',')
 			{
 				free_loop(colors);
 				end_game(map);
@@ -114,11 +109,15 @@ void	load_color(t_map *map, char *str, int i)
 	int		b;
 
 	tmp = megatrim(map, str, i);
+	count_virgule(map, tmp);
 	split = ft_split(tmp, ',');
 	free(tmp);
-	r = ft_atoi(split[0]) % 256;
-	v = ft_atoi(split[1]) % 256;
-	b = ft_atoi(split[2]) % 256;
+	check_colors(map, split, 0, 0);
+	r = ft_atoi(split[0]);
+	v = ft_atoi(split[1]);
+	b = ft_atoi(split[2]);
+	if (r > 255 | v > 255 | b > 255)
+		end_game(map);
 	if (str[0] == 'F')
 		map->floor = (r << 16) | (v << 8) | b;
 	else

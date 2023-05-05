@@ -54,7 +54,6 @@ void	move_left(t_map	*map, t_player	*player)
 		player->pos_x = next_x;
 		player->pos_y = next_y;
 		ray_k_string(map, player);
-		printf("left has exited\n");
 	}
 }
 
@@ -70,7 +69,6 @@ void	move_right(t_map *map, t_player *player)
 		player->pos_x = next_x;
 		player->pos_y = next_y;
 		ray_k_string(map, player);
-		printf("right has exited\n");
 	}
 }
 

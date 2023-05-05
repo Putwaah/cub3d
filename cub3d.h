@@ -132,6 +132,7 @@ void			destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex);
 void			b_null(t_map *map);
 void			error_msg(t_map *map);
 void			clear_frame(t_img *frame);
+void			count_virgule(t_map *map, char *colors);
 
 /*check_map.c*/
 void			check_map(t_map *map);

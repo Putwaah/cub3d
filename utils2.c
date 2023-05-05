@@ -80,3 +80,23 @@ void	clear_frame(t_img *frame)
 		x++;
 	}
 }
+
+void	count_virgule(t_map *map, char *colors)
+{
+	int	z;
+	int	count;
+
+	count = 0;
+	z = 0;
+	while (colors[z])
+	{
+		if (colors[z] == ',')
+			count++;
+		z++;
+	}
+	if (count != 2)
+	{
+		free (colors);
+		end_game(map);
+	}
+}
