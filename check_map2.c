@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:53:34 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 13:59:13 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:32:40 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void	copy_map(t_map *map, char **argv)
 		j = 0;
 		while (gnl[j] == ' ' || gnl[j] == '\t')
 			j++;
-		if ((ft_strncmp(&gnl[j], "1", 1) == 0 || ft_strncmp(&gnl[j], "0", 1) == 0)
-			 && gnl[j] != '\0')
+		if ((ft_strncmp(&gnl[j], "1", 1) == 0
+				|| ft_strncmp(&gnl[j], "0", 1) == 0)
+			&& gnl[j] != '\0')
 			break ;
 		free (gnl);
 		gnl = get_next_line(map->fd);
@@ -76,7 +77,7 @@ void	open_and_copy(char **argv, t_map *map)
 	close(map->fd);
 }
 
-static int check_wall_connection(char **map, int i, int i_next)
+static int	check_wall_connection(char **map, int i, int i_next)
 {
 	int	last;
 	int	last_upper;
@@ -104,10 +105,10 @@ static int check_wall_connection(char **map, int i, int i_next)
 	return (1);
 }
 
-int check_connect(t_map *the_map, int j, int i)
+int	check_connect(t_map *the_map, int j, int i)
 {
-	int 	idx;
-	char 	**map;
+	int		idx;
+	char	**map;
 
 	map = the_map->map_cpy;
 	idx = j - 1;
@@ -116,7 +117,7 @@ int check_connect(t_map *the_map, int j, int i)
 		if (map[i - 1][idx] == '0'
 			|| map[i + 1][idx] == '0')
 			return (0);
-		idx--;	
+		idx--;
 	}
 	if (check_wall_connection(map, i, i - 1) != 1
 		|| check_wall_connection(map, i, i + 1) != 1)

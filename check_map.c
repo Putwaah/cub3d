@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:08:09 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 15:52:03 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:33:14 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ static void	check_middle(t_map *map, int *i, int *j)
 			while (map->map_cpy[*i][*j] == ' ')
 				*j += 1;
 			if (map->map_cpy[*i][*j] != '1' || map->map_cpy[*i][len] != '1')
-				error_msg(map);;
+				error_msg(map);
 			first = *j;
 			last = len;
 			if (check_middle_bis(map, i, j, &len) == 1)
-				error_msg(map);;
+				error_msg(map);
 			*j += 1;
 		}
 		if (check_connect(map, first, *i) != 1)
-			error_msg(map);;
+			error_msg(map);
 		*i += 1;
 	}
 }	
@@ -109,7 +109,8 @@ static void	check_from_bot(t_map *map)
 		{
 			if (map->map_cpy[z][y] == '1' && check[y] == 0)
 				check[y] = 1;
-			if ((map->map_cpy[z][y] == '0' && check[y] != 1) || char_check(map->map_cpy[z][y]) != 1)
+			if ((map->map_cpy[z][y] == '0' && check[y] != 1)
+					|| char_check(map->map_cpy[z][y]) != 1)
 			{	
 				free (check);
 				error_msg(map);
@@ -136,7 +137,7 @@ void	check_map(t_map *map)
 		map->line++;
 		i++;
 	}
-	i = 1;	
+	i = 1;
 	check_from_top(map);
 	check_from_bot(map);
 	check_middle(map, &i, &j);

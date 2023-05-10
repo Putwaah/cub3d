@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/10 17:33:19 by agoichon          #+#    #+#             */
+/*   Updated: 2023/05/10 17:33:34 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	char_check(char to_check)
@@ -41,7 +53,7 @@ int	*init_tab(int max_line_len)
 int	max_line_len(char **map)
 {
 	int	z;
-	int max;
+	int	max;
 
 	max = 0;
 	z = 0;
