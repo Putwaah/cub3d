@@ -76,36 +76,28 @@ void	open_and_copy(char **argv, t_map *map)
 	close(map->fd);
 }
 
-/*int	check_first_line(t_map *map, int *j)
+int	check_middle_bis(t_map *map, int *i, int *j, int *len)
 {
-	if (map->map_cpy[0][*j] != '1' && map->map_cpy[0][*j] != ' ')
-		return (1);
-	while (map->map_cpy[0][*j] == ' ')
+	while (*j < *len)
 	{
-		if (map->map_cpy[1][*j] == 0)
+		if (char_check(map->map_cpy[*i][*j]) != 1)
 			return (1);
-		j += 1;
-	}
-	return (0);
-}	
-
-int	check_first_line_bis(t_map *map, int *i, int *j)
-{
-	while (map->map_cpy[*i] && *i == 0)
-	{
-		if (map->map_cpy[0][*j] == '0')
+		if (map->map_cpy[*i][*j] == ' ' &&
+			(map->map_cpy[*i - 1][*j] == '0' ||
+			map->map_cpy[*i + 1][*j] == '0' ||
+			map->map_cpy[*i][*j - 1] == '0' ||
+			map->map_cpy[*i][*j + 1] == '0'))
 			return (1);
-		while (map->map_cpy[0][*j] &&
-			(map->map_cpy[0][*j] == '1' || map->map_cpy[0][*j] == ' '))
+		if (map->map_cpy[*i][*j] == 'N'
+			|| map->map_cpy[*i][*j] == 'S'
+			|| map->map_cpy[*i][*j] == 'E'
+			|| map->map_cpy[*i][*j] == 'W')
 		{
-			if (map->map_cpy[0][*j] == ' ' &&
-				map->map_cpy[1][*j] != '1' && map->map_cpy[1][*j] != ' ')
+			if (map->pos == 1)
 				return (1);
-			*j += 1;
+			map->pos = 1;
 		}
-		if (map->map_cpy[0][*j] == '\n')
-				*i = 1;
+	*j += 1;
 	}
 	return (0);
 }
-*/	

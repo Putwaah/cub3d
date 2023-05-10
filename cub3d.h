@@ -141,6 +141,7 @@ void			check_map(t_map *map);
 void			copy_map(t_map *map, char **argv);
 void			copy_map_utils(t_map *map, char *gnl);
 void			open_and_copy(char **argv, t_map *map);
+int				check_middle_bis(t_map *map, int *i, int *j, int *len)
 
 /*check_params.c*/
 void			check_params(t_map *map, char **argv);
@@ -175,7 +176,14 @@ void			draw_floor(t_map *map, int *y, int x);
 void			draw(t_rayksting *data, t_map *map, t_player *player, int x);
 void			ray_k_string(t_map *map, t_player *player);
 
-int	tab_count(char **to_count);
+/*check_map_utils.c*/
 int	char_check(char to_check);
+int	check_tab(int *check, int max);
+int	*init_tab(int max_line_len);
+int	max_line_len(char **map);
+int check_connect(t_map *the_map, int j, int i);
+
+
+int	tab_count(char **to_count);
 
 #endif

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cub3d
+NAME	= cub3D
 CC		= @clang
 CFLAGS	=  -I/usr/include -Imlx_linux -O3 -g
 RM		= @rm -f
