@@ -43,7 +43,8 @@ void	copy_map(t_map *map, char **argv)
 		j = 0;
 		while (gnl[j] == ' ' || gnl[j] == '\t')
 			j++;
-		if (ft_strncmp(&gnl[j], "11", 2) == 0)
+		if ((ft_strncmp(&gnl[j], "1", 1) == 0 || ft_strncmp(&gnl[j], "0", 1) == 0)
+			 && gnl[j] != '\0')
 			break ;
 		free (gnl);
 		gnl = get_next_line(map->fd);
@@ -75,7 +76,7 @@ void	open_and_copy(char **argv, t_map *map)
 	close(map->fd);
 }
 
-int	check_first_line(t_map *map, int *j)
+/*int	check_first_line(t_map *map, int *j)
 {
 	if (map->map_cpy[0][*j] != '1' && map->map_cpy[0][*j] != ' ')
 		return (1);
@@ -106,4 +107,5 @@ int	check_first_line_bis(t_map *map, int *i, int *j)
 				*i = 1;
 	}
 	return (0);
-}	
+}
+*/	

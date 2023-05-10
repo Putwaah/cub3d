@@ -22,8 +22,9 @@ void	init_struct(t_map *map)
 	map->sou = 0;
 	map->wes = 0;
 	map->eas = 0;
-	b_null(map);
 	map->pos = 0;
+	map->fd = -2;
+	b_null(map);
 }
 
 static void	init_params_bis(t_map *map, int i)
@@ -63,15 +64,15 @@ static void	init_params_ter(t_map *map, int i)
 		init_the_mlx(map);
 	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
 		load_texture(map, "NO ", i, 0);
-	if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
+	else if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
 		load_texture(map, "SO ", i, 1);
-	if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
+	else if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
 		load_texture(map, "WE ", i, 2);
-	if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
+	else if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
 		load_texture(map, "EA ", i, 3);
-	if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
+	else if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
 		load_color(map, "F ", i);
-	if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
+	else if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
 		load_color(map, "C ", i);
 }	
 

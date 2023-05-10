@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../cub3d/libft/libft.h"
+# include "./libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -141,8 +141,6 @@ void			check_map(t_map *map);
 void			copy_map(t_map *map, char **argv);
 void			copy_map_utils(t_map *map, char *gnl);
 void			open_and_copy(char **argv, t_map *map);
-int				check_first_line(t_map *map, int *j);
-int				check_first_line_bis(t_map *map, int *i, int *j);
 
 /*check_params.c*/
 void			check_params(t_map *map, char **argv);
@@ -176,5 +174,8 @@ void			draw_roof(t_map *map, int draw_start, int *y, int x);
 void			draw_floor(t_map *map, int *y, int x);
 void			draw(t_rayksting *data, t_map *map, t_player *player, int x);
 void			ray_k_string(t_map *map, t_player *player);
+
+int	tab_count(char **to_count);
+int	char_check(char to_check);
 
 #endif

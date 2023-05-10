@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 14:24:12 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:53:12 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	free(tmp);
 }
 
-static int	tab_count(char **to_count)
+int	tab_count(char **to_count)
 {
 	int	z;
 
@@ -88,7 +88,8 @@ static void	check_colors(t_map *map, char **colors, int z, int y)
 	{
 		while (colors[z][y])
 		{
-			if ((colors[z][y] < '0' || colors[z][y] > '9') && colors[z][y] != ',')
+			if ((colors[z][y] < '0' || colors[z][y] > '9')
+					&& colors[z][y] != ',')
 			{
 				free_loop(colors);
 				end_game(map);
