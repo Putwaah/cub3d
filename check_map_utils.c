@@ -54,22 +54,12 @@ int	max_line_len(char **map)
 	return (max);
 }
 
-int check_connect(t_map *the_map, int j, int i)
+int	tab_count(char **to_count)
 {
-	int 	idx;
-	char 	**map;
+	int	z;
 
-	map = the_map->map_cpy;
-	idx = j - 1;
-	while (idx >= 0)
-	{
-		if (map[i - 1][idx] == '0'
-			|| map[i + 1][idx] == '0')
-			return (0);
-		idx--;	
-	}
-	if (check_wall_connection(map, i, i - 1) != 1
-		|| check_wall_connection(map, i, i + 1) != 1)
-		return (0);
-	return (1);
+	z = 0;
+	while (to_count[z])
+		z++;
+	return (z);
 }

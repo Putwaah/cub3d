@@ -12,32 +12,30 @@
 
 #include "cub3d.h"
 
-static int check_wall_connection(char **map, int i, int i_next)
+static int	check_middle_bis(t_map *map, int *i, int *j, int *len)
 {
-	int	last;
-	int	last_upper;
-
-	last = ft_strlen(map[i]) - 2;
-	last_upper = ft_strlen(map[i_next]) - 2;
-	if (last < last_upper)
+	while (*j < *len)
 	{
-		while (last_upper >= last + 1)
+		if (char_check(map->map_cpy[*i][*j]) != 1)
+			return (1);
+		if (map->map_cpy[*i][*j] == ' ' &&
+			(map->map_cpy[*i - 1][*j] == '0' ||
+			map->map_cpy[*i + 1][*j] == '0' ||
+			map->map_cpy[*i][*j - 1] == '0' ||
+			map->map_cpy[*i][*j + 1] == '0'))
+			return (1);
+		if (map->map_cpy[*i][*j] == 'N'
+			|| map->map_cpy[*i][*j] == 'S'
+			|| map->map_cpy[*i][*j] == 'E'
+			|| map->map_cpy[*i][*j] == 'W')
 		{
-			if (map[i_next][last_upper] == '0')
-				return (0);
-			last_upper--;
+			if (map->pos == 1)
+				return (1);
+			map->pos = 1;
 		}
+	*j += 1;
 	}
-	else
-	{
-		while (last >= last_upper + 1)
-		{
-			if (map[i][last] == '0')
-				return (0);
-			last--;
-		}
-	}
-	return (1);
+	return (0);
 }
 
 static void	check_middle(t_map *map, int *i, int *j)

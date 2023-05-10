@@ -76,28 +76,50 @@ void	open_and_copy(char **argv, t_map *map)
 	close(map->fd);
 }
 
-int	check_middle_bis(t_map *map, int *i, int *j, int *len)
+static int check_wall_connection(char **map, int i, int i_next)
 {
-	while (*j < *len)
+	int	last;
+	int	last_upper;
+
+	last = ft_strlen(map[i]) - 2;
+	last_upper = ft_strlen(map[i_next]) - 2;
+	if (last < last_upper)
 	{
-		if (char_check(map->map_cpy[*i][*j]) != 1)
-			return (1);
-		if (map->map_cpy[*i][*j] == ' ' &&
-			(map->map_cpy[*i - 1][*j] == '0' ||
-			map->map_cpy[*i + 1][*j] == '0' ||
-			map->map_cpy[*i][*j - 1] == '0' ||
-			map->map_cpy[*i][*j + 1] == '0'))
-			return (1);
-		if (map->map_cpy[*i][*j] == 'N'
-			|| map->map_cpy[*i][*j] == 'S'
-			|| map->map_cpy[*i][*j] == 'E'
-			|| map->map_cpy[*i][*j] == 'W')
+		while (last_upper >= last + 1)
 		{
-			if (map->pos == 1)
-				return (1);
-			map->pos = 1;
+			if (map[i_next][last_upper] == '0')
+				return (0);
+			last_upper--;
 		}
-	*j += 1;
 	}
-	return (0);
+	else
+	{
+		while (last >= last_upper + 1)
+		{
+			if (map[i][last] == '0')
+				return (0);
+			last--;
+		}
+	}
+	return (1);
+}
+
+int check_connect(t_map *the_map, int j, int i)
+{
+	int 	idx;
+	char 	**map;
+
+	map = the_map->map_cpy;
+	idx = j - 1;
+	while (idx >= 0)
+	{
+		if (map[i - 1][idx] == '0'
+			|| map[i + 1][idx] == '0')
+			return (0);
+		idx--;	
+	}
+	if (check_wall_connection(map, i, i - 1) != 1
+		|| check_wall_connection(map, i, i + 1) != 1)
+		return (0);
+	return (1);
 }

@@ -67,16 +67,6 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	free(tmp);
 }
 
-int	tab_count(char **to_count)
-{
-	int	z;
-
-	z = 0;
-	while (to_count[z])
-		z++;
-	return (z);
-}
-
 static void	check_colors(t_map *map, char **colors, int z, int y)
 {	
 	if (tab_count(colors) != 3)
