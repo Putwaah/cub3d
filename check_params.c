@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/08 13:53:12 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/05/11 09:59:36 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ void	load_texture(t_map *map, char *str, int i, int dir)
 	tmp = megatrim(map, str, i);
 	if (access(tmp, F_OK) != 0)
 	{
+		printf("%s not found\n", tmp);
 		free(tmp);
 		end_game(map);
 	}
 	map->tex[dir]->img = mlx_xpm_file_to_image(map->mlx->display, tmp, &w, &h);
 	if (!map->tex[dir]->img)
 	{	
+		printf("error loading %s\n", tmp);
 		free (tmp);
 		end_game(map);
 	}
@@ -108,7 +110,10 @@ void	load_color(t_map *map, char *str, int i)
 	v = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
 	if (r > 255 | v > 255 | b > 255)
+	{
+		printf("colors values need to be between 0 and 255\n");
 		end_game(map);
+	}
 	if (str[0] == 'F')
 		map->floor = (r << 16) | (v << 8) | b;
 	else
