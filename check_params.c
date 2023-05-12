@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:10:01 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/11 09:59:36 by jtoulous         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:29:42 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	load_color(t_map *map, char *str, int i)
 	if (r > 255 | v > 255 | b > 255)
 	{
 		printf("colors values need to be between 0 and 255\n");
+		free_split(split);
 		end_game(map);
 	}
 	if (str[0] == 'F')
