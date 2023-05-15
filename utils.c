@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	free_map(t_map *map)
+static void	free_map(t_map *map)
 {
 	int	z;
 
@@ -32,58 +32,55 @@ void	free_map(t_map *map)
 	free (map);
 }	
 
-void	line_counter(t_map *map)
+static void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 {
-	char	*ret;
+	int	z;
 
-	ret = get_next_line(map->fd);
-	if (ret == 0)
+	z = -1;
+	if (frame != NULL)
+		mlx_destroy_image(mlx->display, frame->img);
+	if (tex != NULL)
 	{
-		printf("Error\n");
-		free(map);
-		exit(1);
+		while (++z < 4)
+		{
+			if (tex[z]->img != NULL)
+				mlx_destroy_image(mlx->display, tex[z]->img);
+		}
 	}
-	while (ret != NULL)
-	{
-		free(ret);
-		map->line++;
-		ret = get_next_line(map->fd);
-		if (ret == NULL)
-			free(ret);
+	if (mlx != NULL)
+	{	
+		mlx_loop_end(mlx->display);
+		mlx_destroy_window(mlx->display, mlx->win);
+		mlx_destroy_display(mlx->display);
+		free (mlx->display);
+		free (mlx);
 	}
 }
-
-char	*megatrim(t_map *map, const char *id, int i)
-{
-	char	*rtn;
-	char	*tmp;
-
-	tmp = ft_strtrim(map->param_cpy[i], id);
-	rtn = ft_strtrim(tmp, "\n");
-	free (tmp);
-	tmp = ft_strtrim(rtn, "\t");
-	free (rtn);
-	rtn = ft_strtrim(tmp, " ");
-	free (tmp);
-	return (rtn);
-}
-
-void	free_split(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-}	
 
 void	end_game(t_map *map)
 {
 	destroy_the_mlx(map->mlx, map->frame, map->tex);
 	free_map(map);
 	exit (69);
+}
+
+int	map_start(t_map *map, char **args)
+{
+	int	z;
+	int	y;
+
+	y = 0;
+	z = 0;
+	while (args[z])
+	{
+		while (args[z][y] == ' ')
+			y++;
+		if (args[z][y] == '0' || args[z][y] == '1')
+			return (z);
+		y = 0;
+		z++;
+	}
+	free_loop(args);
+	exit_error(map, "no map found");
+	return (0);
 }

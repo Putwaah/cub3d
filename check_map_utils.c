@@ -59,7 +59,7 @@ int	max_line_len(char **map)
 	z = 0;
 	while (map[z])
 	{
-		if (ft_strlen(map[z]) > max)
+		if ((int)ft_strlen(map[z]) > max)
 			max = ft_strlen(map[z]);
 		z++;
 	}

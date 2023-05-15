@@ -12,7 +12,15 @@
 
 #include "cub3d.h"
 
-void	calc_draw_params(t_rayksting *data, t_player *player)
+static unsigned int	get_pixel(t_img *tex, int x, int y)
+{
+	char	*rtn;
+
+	rtn = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
+	return (*(unsigned int *)rtn);
+}
+
+static void	calc_draw_params(t_rayksting *data, t_player *player)
 {
 	data->pitch = 100;
 	data->draw_start = -data->line_height / 2 + HEIGHT / 2 + data->pitch;
@@ -41,7 +49,7 @@ void	calc_draw_params(t_rayksting *data, t_player *player)
 		data->tex_x = 64 - data->tex_x - 1;
 }
 
-void	draw_roof(t_map *map, int draw_start, int *y, int x)
+static void	draw_roof(t_map *map, int draw_start, int *y, int x)
 {
 	while (*y < draw_start)
 	{
@@ -50,7 +58,7 @@ void	draw_roof(t_map *map, int draw_start, int *y, int x)
 	}
 }
 
-void	draw_floor(t_map *map, int *y, int x)
+static void	draw_floor(t_map *map, int *y, int x)
 {
 	while (*y < HEIGHT)
 	{
@@ -62,7 +70,6 @@ void	draw_floor(t_map *map, int *y, int x)
 void	draw(t_rayksting *data, t_map *map, t_player *player, int x)
 {
 	int				y;
-	int				d;
 	double			step;
 	double			tex_pos;
 	unsigned int	color;
@@ -84,22 +91,4 @@ void	draw(t_rayksting *data, t_map *map, t_player *player, int x)
 		y++;
 	}
 	draw_floor(map, &y, x);
-}
-
-void	ray_k_string(t_map *map, t_player *player)
-{
-	int			x;
-	int			y;
-	t_rayksting	ray_data;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		rayksting_init(player, &ray_data, x);
-		dda(&ray_data, map->map_cpy);
-		draw(&ray_data, map, player, x);
-		x++;
-	}
-	mlx_put_image_to_window(map->mlx->display, map->mlx->win,
-		map->frame->img, 0, 0);
 }

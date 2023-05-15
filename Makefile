@@ -12,12 +12,12 @@
 
 NAME	= cub3D
 CC		= @clang
-CFLAGS	=  -I/usr/include -Imlx_linux -O3 -g
+CFLAGS	=  -I/usr/include -Imlx_linux -O3 -g -Wall -Wextra -Werror
 RM		= @rm -f
 CLEAR	= @clear
 
 # FILE
-SRC	= ./check_map.c ./check_params.c ./handle.c ./init.c ./main.c ./ray_K_string.c ./utils.c ./check_map2.c ./handle2.c ./ray_K_string2.c ./utils2.c ./init2.c ./check_map_utils.c
+SRC	= ./check_map_3.c ./utils_3.c ./check_map.c ./check_params.c ./handle.c ./init.c ./main.c ./ray_K_string.c ./utils.c ./check_map2.c ./handle2.c ./ray_K_string2.c ./utils2.c ./check_map_utils.c
 OBJ	= $(SRC:.c=.o)
 
 #LIBFT

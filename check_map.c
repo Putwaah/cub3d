@@ -12,59 +12,17 @@
 
 #include "cub3d.h"
 
-static int	check_middle_bis(t_map *map, int *i, int *j, int *len)
+static void	check_left_n_right(t_map *map)
 {
-	while (*j < *len)
-	{
-		if (char_check(map->map_cpy[*i][*j]) != 1)
-			return (1);
-		if (map->map_cpy[*i][*j] == ' ' &&
-			(map->map_cpy[*i - 1][*j] == '0' ||
-			map->map_cpy[*i + 1][*j] == '0' ||
-			map->map_cpy[*i][*j - 1] == '0' ||
-			map->map_cpy[*i][*j + 1] == '0'))
-			return (1);
-		if (map->map_cpy[*i][*j] == 'N'
-			|| map->map_cpy[*i][*j] == 'S'
-			|| map->map_cpy[*i][*j] == 'E'
-			|| map->map_cpy[*i][*j] == 'W')
-		{
-			if (map->pos == 1)
-				return (1);
-			map->pos = 1;
-		}
-	*j += 1;
+	int	z;
+
+	z = 1;
+	while (map->map_cpy[z + 1])
+	{	
+		check_the_line(map, z);
+		z++;
 	}
-	return (0);
 }
-
-static void	check_middle(t_map *map, int *i, int *j)
-{
-	int	len;
-	int	first;
-	int	last;
-
-	while (*i < tab_count(map->map_cpy) - 1)
-	{
-		*j = 0;
-		while (map->map_cpy[*i][*j] != '\n')
-		{	
-			len = ft_strlen(map->map_cpy[*i]) - 2;
-			while (map->map_cpy[*i][*j] == ' ')
-				*j += 1;
-			if (map->map_cpy[*i][*j] != '1' || map->map_cpy[*i][len] != '1')
-				error_msg(map);
-			first = *j;
-			last = len;
-			if (check_middle_bis(map, i, j, &len) == 1)
-				error_msg(map);
-			*j += 1;
-		}
-		if (check_connect(map, first, *i) != 1)
-			error_msg(map);
-		*i += 1;
-	}
-}	
 
 static void	check_from_top(t_map *map)
 {
@@ -84,7 +42,7 @@ static void	check_from_top(t_map *map)
 			if (map->map_cpy[z][y] == '0' && check[y] != 1)
 			{	
 				free (check);
-				error_msg(map);
+				exit_error(map, "map error");
 			}
 			y++;
 		}
@@ -113,7 +71,7 @@ static void	check_from_bot(t_map *map)
 					|| char_check(map->map_cpy[z][y]) != 1)
 			{	
 				free (check);
-				error_msg(map);
+				exit_error(map, "map error");
 			}
 			y++;
 		}
@@ -123,22 +81,39 @@ static void	check_from_bot(t_map *map)
 	free (check);
 }
 
+static void	basic_check(t_map *map)
+{
+	int	player;
+	int	z;
+	int	y;
+
+	player = 0;
+	z = 0;
+	y = 0;
+	if (tab_count(map->map_cpy) <= 2)
+		exit_error(map, "map problem");
+	while (map->map_cpy[z])
+	{
+		while (map->map_cpy[z][y])
+		{
+			if (map->map_cpy[z][y] == 'N' || map->map_cpy[z][y] == 'W'
+				|| map->map_cpy[z][y] == 'E' || map->map_cpy[z][y] == 'S')
+				player++;
+			if (char_check(map->map_cpy[z][y]) != 1)
+				exit_error(map, "unauthorized character");
+			y++;
+		}
+		y = 0;
+		z++;
+	}
+	if (player != 1)
+		exit_error(map, "one player por favor");
+}
+
 void	check_map(t_map *map)
 {
-	int	i;
-	int	j;
-	int	len;
-
-	j = 0;
-	i = 0;
-	map->line = 1;
-	while (map->map_cpy[i])
-	{
-		map->line++;
-		i++;
-	}
-	i = 1;
+	basic_check(map);
 	check_from_top(map);
 	check_from_bot(map);
-	check_middle(map, &i, &j);
+	check_left_n_right(map);
 }

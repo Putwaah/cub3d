@@ -46,12 +46,10 @@ void	destroy_the_mlx(t_mlx *mlx, t_img *frame, t_img **tex)
 	}
 }
 
-void	error_msg(t_map *map)
+void	exit_error(t_map *map, char *err_msg)
 {
-	printf("Error\n");
-	close (map->fd);
+	printf("%s\n", err_msg);
 	end_game(map);
-	exit(1);
 }
 
 void	clear_frame(t_img *frame)

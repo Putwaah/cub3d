@@ -12,69 +12,79 @@
 
 #include "cub3d.h"
 
-void	init_struct(t_map *map)
+/*void	init_struct(t_map *map)
 {
-	static int	z = -1;
-
-	map->f = 0;
-	map->c = 0;
-	map->nor = 0;
-	map->sou = 0;
-	map->wes = 0;
-	map->eas = 0;
-	map->pos = 0;
-	map->fd = -2;
 	b_null(map);
+	map->param_cpy = ft_calloc(7, sizeof(char *));
+}*/
+
+static void	north_south_init(char dir, t_player *player)
+{
+	if (dir == 'N')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
+	}
+	else if (dir == 'S')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
+	}
 }
 
-static void	init_params_bis(t_map *map, int i)
+void	init_dir(char dir, t_player *player)
 {
-	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->nor == 0)
-		map->nor = 1;
-	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->nor == 1)
-		map->nor = 2;
-	if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0 && map->sou == 0)
-		map->sou = 1;
-	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->sou == 1)
-		map->sou = 2;
-	if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0 && map->wes == 0)
-		map->wes = 1;
-	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->wes == 1)
-		map->wes = 2;
-	if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0 && map->eas == 0)
-		map->eas = 1;
-	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->eas == 1)
-		map->eas = 2;
-	if (ft_strncmp(map->param_cpy[i], "F", 1) == 0 && map->f == 0)
-		map->f = 1;
-	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->f == 1)
-		map->f = 2;
-	if (ft_strncmp(map->param_cpy[i], "C", 1) == 0 && map->c == 0)
-		map->c = 1;
-	else if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0 && map->f == 1)
-		map->f = 2;
-}	
+	if (dir == 'N' || dir == 'S')
+	{
+		north_south_init(dir, player);
+	}
+	else if (dir == 'E')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
+	}
+	else if (dir == 'W')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
+	}
+}
 
-static void	init_params_ter(t_map *map, int i)
+t_player	*init_player_data(char **map, int x, int y)
 {
-	int	z;
+	t_player	*player;
+	static int	found = 0;
 
-	z = -1;
-	if (i == 0)
-		init_the_mlx(map);
-	if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
-		load_texture(map, "NO ", i, 0);
-	else if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
-		load_texture(map, "SO ", i, 1);
-	else if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
-		load_texture(map, "WE ", i, 2);
-	else if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
-		load_texture(map, "EA ", i, 3);
-	else if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
-		load_color(map, "F ", i);
-	else if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
-		load_color(map, "C ", i);
-}	
+	player = malloc(sizeof(t_player));
+	while (map[x] && found == 0)
+	{
+		while (map[x][y] && found == 0)
+		{
+			if (map[x][y] == 'N' || map[x][y] == 'S'
+				|| map[x][y] == 'E' || map[x][y] == 'W')
+			{	
+				init_dir(map[x][y], player);
+				found = 1;
+				player->pos_x = x + 0.5;
+				player->pos_y = y + 0.5;
+				map[x][y] = '0';
+			}
+			y++;
+		}
+		x++;
+		if (found != 1)
+			y = 0;
+	}
+	return (player);
+}
 
 void	init_params(t_map *map)
 {
@@ -83,26 +93,26 @@ void	init_params(t_map *map)
 	i = 0;
 	while (map->param_cpy[i] != NULL)
 	{
-		init_params_bis(map, i);
-		i++;
-	}
-	if (map->nor + map->sou + map->wes + map->eas + map->c + map->f != 6)
-	{
-		printf("Error params\n");
-		free_map(map);
-		exit (1);
-	}
-	i = 0;
-	while (map->param_cpy[i] != NULL)
-	{
-		init_params_ter(map, i);
+		if (i == 0)
+			init_the_mlx(map);
+		if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
+			load_texture(map, "NO ", i, 0);
+		else if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
+			load_texture(map, "SO ", i, 1);
+		else if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
+			load_texture(map, "WE ", i, 2);
+		else if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
+			load_texture(map, "EA ", i, 3);
+		else if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
+			load_color(map, "F ", i);
+		else if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
+			load_color(map, "C ", i);
 		i++;
 	}	
 }
 
 void	init_the_mlx(t_map *map)
 {
-	t_mlx	*mlx;
 	int		z;
 
 	z = -1;

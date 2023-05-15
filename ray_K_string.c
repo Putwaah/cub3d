@@ -27,15 +27,7 @@ void	set_pixel(t_img *frame, int x, int y, unsigned int color)
 	}
 }
 
-unsigned int	get_pixel(t_img *tex, int x, int y)
-{
-	char	*rtn;
-
-	rtn = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
-	return (*(unsigned int *)rtn);
-}
-
-void	calc_step(t_rayksting *data, t_player *player)
+static void	calc_step(t_rayksting *data, t_player *player)
 {
 	if (data->ray_dir_x < 0)
 	{
@@ -61,7 +53,7 @@ void	calc_step(t_rayksting *data, t_player *player)
 	}
 }
 
-void	rayksting_init(t_player *player, t_rayksting *data, int x)
+static void	rayksting_init(t_player *player, t_rayksting *data, int x)
 {
 	double	camera_x;
 
@@ -81,7 +73,7 @@ void	rayksting_init(t_player *player, t_rayksting *data, int x)
 	calc_step(data, player);
 }
 
-void	dda(t_rayksting *data, char **map)
+static void	dda(t_rayksting *data, char **map)
 {
 	int	hit;
 
@@ -108,4 +100,21 @@ void	dda(t_rayksting *data, char **map)
 	else
 		data->perp_wall_dist = data->side_dist_y - data->delta_dist_y;
 	data->line_height = (HEIGHT / data->perp_wall_dist);
+}
+
+void	ray_k_string(t_map *map, t_player *player)
+{
+	int			x;
+	t_rayksting	ray_data;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		rayksting_init(player, &ray_data, x);
+		dda(&ray_data, map->map_cpy);
+		draw(&ray_data, map, player, x);
+		x++;
+	}
+	mlx_put_image_to_window(map->mlx->display, map->mlx->win,
+		map->frame->img, 0, 0);
 }
