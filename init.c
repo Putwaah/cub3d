@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:21:24 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 16:26:36 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:49:35 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,31 +86,6 @@ t_player	*init_player_data(char **map, int x, int y)
 	return (player);
 }
 
-void	init_params(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (map->param_cpy[i] != NULL)
-	{
-		if (i == 0)
-			init_the_mlx(map);
-		if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
-			load_texture(map, "NO ", i, 0);
-		else if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
-			load_texture(map, "SO ", i, 1);
-		else if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
-			load_texture(map, "WE ", i, 2);
-		else if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
-			load_texture(map, "EA ", i, 3);
-		else if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
-			load_color(map, "F ", i);
-		else if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
-			load_color(map, "C ", i);
-		i++;
-	}	
-}
-
 void	init_the_mlx(t_map *map)
 {
 	int		z;
@@ -135,4 +110,29 @@ void	init_the_mlx(t_map *map)
 			&map->frame->endian);
 	while (++z < 4)
 		map->tex[z]->img = NULL;
+}
+
+void	init_params(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->param_cpy[i] != NULL)
+	{
+		if (i == 0)
+			init_the_mlx(map);
+		if (ft_strncmp(map->param_cpy[i], "NO", 2) == 0)
+			load_texture(map, "NO ", i, 0);
+		else if (ft_strncmp(map->param_cpy[i], "SO", 2) == 0)
+			load_texture(map, "SO ", i, 1);
+		else if (ft_strncmp(map->param_cpy[i], "WE", 2) == 0)
+			load_texture(map, "WE ", i, 2);
+		else if (ft_strncmp(map->param_cpy[i], "EA", 2) == 0)
+			load_texture(map, "EA ", i, 3);
+		else if (ft_strncmp(map->param_cpy[i], "F", 1) == 0)
+			load_color(map, "F ", i);
+		else if (ft_strncmp(map->param_cpy[i], "C", 1) == 0)
+			load_color(map, "C ", i);
+		i++;
+	}	
 }

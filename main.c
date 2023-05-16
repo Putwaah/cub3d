@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:41:28 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/04 16:05:53 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/16 09:49:53 by agoichon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	get_params(t_map *map, char **args)
 {
-	int 	check[6];
+	int		check[6];
 	int		y;
 	int		z;
 	int		end;
 
 	y = 0;
 	z = -1;
-	end =  map_start(map, args);
+	end = map_start(map, args);
 	while (++z < 6)
 		check[z] = 0;
 	z = 0;
@@ -41,7 +41,7 @@ static void	get_params(t_map *map, char **args)
 
 static void	get_map(t_map *map, char **args)
 {
-	int z;
+	int	z;
 	int	y;
 
 	z = map_start(map, args);

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 09:45:56 by agoichon          #+#    #+#             */
+/*   Updated: 2023/05/16 09:45:59 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	check_params(t_map *map, char *line, int start, int *check)
 {
-	int param;
-	
+	int	param;
+
 	if (ft_strncmp(&line[start], "NO ", 3) == 0)
 		param = 0;
 	else if (ft_strncmp(&line[start], "SO ", 3) == 0)
@@ -29,12 +41,12 @@ int	check_params(t_map *map, char *line, int start, int *check)
 	return (1);
 }
 
-static char **malloc_file_size(t_map *map, char *file)
+static char	**malloc_file_size(t_map *map, char *file)
 {
 	char	*gnl;
 	char	**copy;
 	int		len;
-	int 	fd;
+	int		fd;
 
 	len = 1;
 	fd = open(file, O_RDONLY);
@@ -57,7 +69,7 @@ static char **malloc_file_size(t_map *map, char *file)
 	return (copy);
 }
 
-char **copy_file(t_map *map, char *file)
+char	**copy_file(t_map *map, char *file)
 {
 	char	**copy;
 	char	*gnl;
@@ -80,6 +92,6 @@ char **copy_file(t_map *map, char *file)
 		}
 		z++;
 	}
-    close (fd);
+	close (fd);
 	return (copy);
 }

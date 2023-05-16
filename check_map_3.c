@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 09:42:42 by agoichon          #+#    #+#             */
+/*   Updated: 2023/05/16 09:43:14 by agoichon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_from_start(t_map *map, int z)
@@ -40,7 +52,7 @@ static int	check_from_end(t_map *map, int z)
 
 static void	check_connect_start(t_map *map, int line, int start)
 {
-	int start_above;
+	int	start_above;
 	int	start_under;
 
 	start_above = check_from_start(map, line - 1);
@@ -51,7 +63,7 @@ static void	check_connect_start(t_map *map, int line, int start)
 
 static void	check_connect_end(t_map *map, int line, int last)
 {
-	int last_above;
+	int	last_above;
 	int	last_under;
 
 	last_above = check_from_end(map, line - 1);
@@ -63,20 +75,21 @@ static void	check_connect_end(t_map *map, int line, int last)
 void	check_the_line(t_map *map, int z)
 {
 	int	first;
-	int last;
+	int	last;
 	int	tmp;
-	
+
 	first = check_from_start(map, z);
 	last = check_from_end(map, z);
 	tmp = first;
 	while (tmp < last)
 	{
 		if (map->map_cpy[z][tmp] == '0' && (map->map_cpy[z + 1][tmp] == ' '
-			|| map->map_cpy[z - 1][tmp] == ' ' || map->map_cpy[z][tmp + 1] == ' '
+			|| map->map_cpy[z - 1][tmp] == ' '
+			|| map->map_cpy[z][tmp + 1] == ' '
 			|| map->map_cpy[z - 1][tmp - 1] == ' '))
 			exit_error(map, "map error");
 		tmp++;
-	} 
+	}
 	check_connect_start(map, z, first);
 	check_connect_end(map, z, last);
 }
