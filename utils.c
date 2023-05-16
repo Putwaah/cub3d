@@ -16,11 +16,19 @@ static void	free_map(t_map *map)
 {
 	int	z;
 
-	z = -1;
+	z = 0;
 	if (map->map_cpy != NULL)
 		free_loop(map->map_cpy);
 	if (map->param_cpy != NULL)
-		free_loop(map->param_cpy);
+	{
+		while (z < 6)
+		{
+			free(map->param_cpy[z]);
+			z++;
+		}
+		free (map->param_cpy);
+	}
+	z = -1;
 	if (map->frame != NULL)
 		free (map->frame);
 	if (map->tex != NULL)
