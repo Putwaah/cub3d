@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-void	fnl_check(t_map *map, char **args, int *check)
-{
-	int	z;
-
-	z = 0;
-	while (z < 6)
-	{
-		if (check[z] != 1)
-		{
-			free_loop(args);
-			exit_error(map, "parameters problem");
-		}
-		z++;
-	}
-}
-
 static void	get_params(t_map *map, char **args)
 {
 	int		check[6];

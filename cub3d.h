@@ -149,5 +149,6 @@ void		b_null(t_map *map);
 void		init_params(t_map *map);
 void		load_color(t_map *map, char *str, int i);
 void		load_texture(t_map *map, char *str, int i, int dir);
+void		fnl_check(t_map *map, char **args, int *check);
 
 #endif

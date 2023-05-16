@@ -6,7 +6,7 @@
 /*   By: agoichon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 09:45:56 by agoichon          #+#    #+#             */
-/*   Updated: 2023/05/16 09:45:59 by agoichon         ###   ########.fr       */
+/*   Updated: 2023/05/16 11:01:01 by jtoulous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,20 @@ char	**copy_file(t_map *map, char *file)
 	}
 	close (fd);
 	return (copy);
+}
+
+void	fnl_check(t_map *map, char **args, int *check)
+{
+	int	z;
+
+	z = 0;
+	while (z < 6)
+	{
+		if (check[z] != 1)
+		{
+			free_loop(args);
+			exit_error(map, "parameters problem");
+		}
+		z++;
+	}
 }
